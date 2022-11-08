@@ -27,7 +27,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="<?=BASE; ?>"><span class="ef">Meu</span> Mural</a>
+      <a class="navbar-brand" href="<?=BASE; ?>">
+        <span class="ef">Meu</span> Mural 
+        <i class="fas fa-pencil-alt"></i>
+      </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <!-- <ul class="nav navbar-nav">
@@ -37,7 +40,7 @@
       </ul> -->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<?=BASE; ?>">Home</a></li>
-        <li><a href="<?=BASE; ?>">Login</a></li>
+        <li><a href="<?=BASE; ?>home/login">Login</a></li>
       </ul>
     </div>
   </div>
