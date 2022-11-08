@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto_Medium';
+}
+
+@import 'variables.less';
+
+body {
+    background-color: @color-third;
+    color: @color-primary;
+
+    @import 'mixins.less';
+    
+    @import 'custom/menu.less';
+}

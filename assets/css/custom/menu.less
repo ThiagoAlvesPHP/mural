@@ -1,0 +1,47 @@
+.navbar {
+    background-color: @color-bedroom;
+    border: 0;
+
+    .container {
+        background-color: @color-bedroom;
+        border: 0;
+
+        .navbar-header {
+            .navbar-brand {
+                color: @color-third;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 18px;
+                letter-spacing: 2px;
+                transition: all ease .5s;
+
+                .ef {
+                    color: @color-primary;
+                }
+
+                &:hover {
+                    transform: scale(1.04);
+                }
+            }
+        }
+
+        .navbar-collapse {
+            .navbar-nav {
+                li {
+                    a {
+                        color: @color-third;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        font-size: 18px;
+                        letter-spacing: 2px;
+                        transition: all ease .5s;
+
+                        &:hover {
+                            transform: scale(1.04);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
