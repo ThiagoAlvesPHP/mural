@@ -14,6 +14,10 @@
 </head>
 <body>
 
+<div class="loading">
+  <div class="loader"></div>
+</div>
+
 <!-- menu -->
 <nav class="navbar navbar-default">
   <div class="container">
