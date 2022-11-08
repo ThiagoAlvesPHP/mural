@@ -11,4 +11,4 @@ assets/js/config.js<br>
 Alterar o caminho das variaveis
 
 <hr>
-Acesse: www.albicod.com
+Acesse: www.ltdeveloper.com.br
