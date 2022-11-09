@@ -27,20 +27,43 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="<?=BASE; ?>">
+      <a class="navbar-brand" href="<?=(!empty($_SESSION['cLogin']))?BASE.'admin':BASE ?>">
         <span class="ef">Meu</span> Mural 
         <i class="fas fa-pencil-alt"></i>
       </a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <!-- <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul> -->
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?=BASE; ?>">Home</a></li>
-        <li><a href="<?=BASE; ?>home/login">Login</a></li>
+        <?php if(!empty($_SESSION['cLogin'])): ?>
+          <li>
+            <a href="<?=BASE; ?>admin">
+              <i class="fas fa-tachometer-alt"></i> Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="<?=BASE; ?>users">
+              <i class="fas fa-users"></i> Usuários
+            </a>
+          </li>
+          <li>
+            <a href="<?=BASE; ?>guidance">
+              <i class="fas fa-genderless"></i> Orientação
+            </a>
+          </li>
+          <li>
+            <a href="<?=BASE; ?>interest">
+              <i class="fas fa-transgender"></i> Interesse
+            </a>
+          </li>
+          <li>
+            <a href="<?=BASE; ?>admin/logout" title="Sair">
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
+          </li>
+        <?php else: ?>
+          <li><a href="<?=BASE; ?>">Home</a></li>
+          <li><a href="<?=BASE; ?>home/login">Login</a></li>
+        <?php endif; ?>
       </ul>
     </div>
   </div>

@@ -4,4 +4,51 @@
         font-family: 'MsMadi';
         font-size: 50px;
     }
+
+    form {
+        .form-group {
+            .group-radios {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .radios {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0 5px;
+                    padding: 10px;
+                    border-radius: 5px;
+                    background-color: @color-bedroom;
+                    height: 60px;
+
+                    input, label {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    label {
+                        font-size: 12px;
+                        text-transform: capitalize;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            .complement {
+                .col-sm-6 {
+                    &:last-child {
+                        display: flex;
+                        justify-content: end;
+                        align-items: center;
+                        cursor: pointer;
+
+                        span {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

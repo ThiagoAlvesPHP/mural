@@ -1,21 +1,33 @@
 <?php
-class Usuarios extends model{
-	//fazer login
+class Users extends model{
+	/**
+	 * Login user
+	 */
 	public function login($post){
 		$sql = $this->db->prepare('
-			SELECT id FROM cad_usuarios 
-			WHERE login = :login
-			AND senha = :senha
+			SELECT id FROM users 
+			WHERE email = :email
+			AND pass = :pass
 		');
-		$sql->bindValue(':login', $post['login']);
-		$sql->bindValue(':senha', md5($post['senha']));
+		$sql->bindValue(':email', $post['email']);
+		$sql->bindValue(':pass', md5($post['pass']));
 		$sql->execute();
+		
 		if ($sql->rowCount() > 0) {
 			$dados = $sql->fetch(PDO::FETCH_ASSOC);
 			$_SESSION['cLogin'] = $dados['id'];
 			return true;
 		} else {
 			return false;
+		}
+	}
+	/**
+	 * verifiy user logado
+	 */
+	public function logado()
+	{
+		if (!isset($_SESSION['cLogin'])) {
+			header('Location: '.BASE);
 		}
 	}
 	//selecionar dados de cliente
@@ -68,21 +80,6 @@ class Usuarios extends model{
 			SET {$fields}
 			WHERE id = '{$post['id']}'
 		");
-
-		foreach ($post as $key => $value) {
-            $sql->bindValue(":{$key}", $value);
-        }
-		$sql->execute();
-	}
-	
-	//cadatrar cliente
-	public function setCartao($post){
-		$fields = [];
-        foreach ($post as $key => $value) {
-            $fields[] = "$key=:$key";
-        }
-        $fields = implode(', ', $fields);
-		$sql = $this->db->prepare("INSERT INTO cad_cliente_cartoes SET {$fields}");
 
 		foreach ($post as $key => $value) {
             $sql->bindValue(":{$key}", $value);
