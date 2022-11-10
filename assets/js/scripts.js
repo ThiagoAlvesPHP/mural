@@ -1,6 +1,6 @@
 $(function () {
     setTimeout(() => {
-        $('.loading').hide();
+        $('.loading').hide("slow");
     }, 1500);
 
     $("[name='whatsapp']").mask("(99)99999-9999");
@@ -42,14 +42,20 @@ $(function () {
                 method: "POST",
                 url: `${url}home/ajax`,
                 dataType: "json",
-                data: { name: name, email: email, whatsapp: whatsapp, age: age, guidance: guidance, interest: interest, color: color}
+                data: { name: name, email: email, whatsapp: whatsapp, age: age, guidance: guidance, interest: interest, color: color},
+                beforeSend : function(){
+                    $('.loading').show();
+                }
             })
             .done(function( data ) {
                 if (data.status) {
-                    console.log(data);
                     let html = `<div class="alert alert-info"><span style="color: ${data.data.colorHex};">${data.data.message}</span></div>`;
                     $('#result').html(html);
+                    $('.loading').hide("slow");
                 }
+            })
+            .fail(function(jqXHR, textStatus, msg){
+                $('.loading').hide("slow");
             });
 
             $('.complement').css('display', 'flex')
