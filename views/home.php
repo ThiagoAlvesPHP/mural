@@ -80,6 +80,8 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-success btn-block btn-lg">
+            <span>Publicar</span>
+        </button>
     </form>
 </section>
