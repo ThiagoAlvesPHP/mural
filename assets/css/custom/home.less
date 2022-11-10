@@ -7,33 +7,44 @@
 
     form {
         .form-group {
-            // .group-radios {
-            //     display: flex;
-            //     justify-content: center;
-            //     align-items: center;
+            .group-radios {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
 
-            //     .radios {
-            //         display: flex;
-            //         justify-content: center;
-            //         align-items: center;
-            //         margin: 0 5px;
-            //         padding: 10px;
-            //         border-radius: 5px;
-            //         background-color: @color-bedroom;
-            //         height: 60px;
+                .radio-inline {
+                    padding: 10px;
+                    border: 1px solid @color-bedroom;
+                    border-radius: 5px;
+                    width: 45%;
+                    margin: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: all ease .5s;
+                    height: 50px;
 
-            //         input, label {
-            //             margin: 0;
-            //             padding: 0;
-            //         }
+                    &.active {
+                        background-color: @color-bedroom;
+                    }
 
-            //         label {
-            //             font-size: 12px;
-            //             text-transform: capitalize;
-            //             margin-left: 5px;
-            //         }
-            //     }
-            // }
+                    input {
+                        display: none;
+                    }
+
+                    span {
+                        display: block;
+                        text-align: center;
+                        margin: 0;
+                        font-size: 12px;
+                    }
+
+                    i {
+                        font-size: 20px;
+                    }
+                }
+            }
 
             .complement {
                 .col-sm-6 {
@@ -45,6 +56,24 @@
 
                         span {
                             margin-right: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media @desktop {
+    .home {
+        form {
+            .form-group {
+                .group-radios {
+                    .radio-inline {
+                        width: 22%;
+
+                        span {
+                            font-size: 14px;
                         }
                     }
                 }

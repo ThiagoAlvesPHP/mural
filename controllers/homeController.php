@@ -18,6 +18,7 @@ class homeController extends controller {
 	public function index() {
 		$this->array['guidances'] = $this->guidance->list();
 		$this->array['interests'] = $this->interest->list();
+		$this->array['colors'] = $this->colors();
 
 		$this->loadTemplate('home', $this->array);
 	}
@@ -48,5 +49,55 @@ class homeController extends controller {
 				header('Location: '.BASE.'home/login?error=true&data='.base64_encode(json_encode($this->post)));
 			}
 		}
+	}
+
+	/**
+	 * color public
+	 */
+	public function colors()
+	{
+		$this->array['colors'] = [
+			[
+				'color' => '#3dbaf1'
+			],
+			[
+				'color' => '#0a71c0'
+			],
+			[
+				'color' => '#ffc001'
+			],
+			[
+				'color' => '#ffff0e'
+			],
+			[
+				'color' => '#9ed981'
+			],
+			[
+				'color' => '#2fc57d'
+			],
+			[
+				'color' => '#cf200e'
+			],
+			[
+				'color' => '#ff194e'
+			],
+			[
+				'color' => '#924aa5'
+			],
+			[
+				'color' => '#b3aad8'
+			],
+			[
+				'color' => '#fc29de'
+			],
+			[
+				'color' => '#da9594'
+			],
+			[
+				'color' => '#443d3d'
+			]
+		];
+
+		return $this->array['colors'];
 	}
 }

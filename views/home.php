@@ -25,30 +25,41 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group guidances">
             <p class="title">Orientação</p>
-
             <div class="group-radios">
                 <?php if(!empty($guidances)): ?>
                     <?php foreach ($guidances as $value): ?>
-                        <div class="radios">
+                        <label class="radio-inline">
                             <input type="radio" name="guidance" id="guidances<?=$value['id'] ?>" value="<?=$value['title'] ?>">
-                            <label for="guidances<?=$value['id'] ?>"><?=$value['title'] ?></label>
-                        </div>
+                            <span><?=$value['title'] ?></span>
+                        </label>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group interests">
             <p class="title">Interesse</p>
-
             <div class="group-radios">
                 <?php if(!empty($interests)): ?>
                     <?php foreach ($interests as $value): ?>
-                        <div class="radios">
+                        <label class="radio-inline">
                             <input type="radio" name="interest" id="interests<?=$value['id'] ?>" value="<?=$value['title'] ?>">
-                            <label for="interests<?=$value['id'] ?>"><?=$value['title'] ?></label>
-                        </div>
+                            <span><?=$value['title'] ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="form-group colors">
+            <p class="title">Cor da Publicação</p>
+            <div class="group-radios">
+                <?php if(!empty($colors)): ?>
+                    <?php foreach ($colors as $key => $value): ?>
+                        <label class="radio-inline">
+                            <input type="radio" name="color" value="<?=$key; ?>">
+                            <i class="fas fa-star" style="color: <?=$value['color'] ?>;"></i>
+                        </label>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
