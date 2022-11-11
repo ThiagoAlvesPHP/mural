@@ -1,6 +1,6 @@
 $(function () {
     setTimeout(() => {
-        $('.loading').hide("slow");
+        $('.loading').hide();
     }, 1500);
 
     $("[name='whatsapp']").mask("(99)99999-9999");
@@ -51,11 +51,11 @@ $(function () {
                 if (data.status) {
                     let html = `<div class="alert alert-info"><span style="color: ${data.data.colorHex};">${data.data.message}</span></div>`;
                     $('#result').html(html);
-                    $('.loading').hide("slow");
+                    $('.loading').hide();
                 }
             })
             .fail(function(jqXHR, textStatus, msg){
-                $('.loading').hide("slow");
+                $('.loading').hide();
             });
 
             $('.complement').css('display', 'flex')
@@ -100,4 +100,16 @@ $(function () {
             return value;   
         }
     }
+
+    /**
+     * complement
+     */
+    // $(document).on('keyup', '#complement', function(){
+    //     let text = $(this).val();
+    //     let result = $('#result span').text();
+
+    //     result += `${text}`;
+
+    //     $('#result span').text(result);
+    // });
 });

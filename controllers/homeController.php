@@ -6,6 +6,7 @@ class homeController extends controller {
 	private $user;
 	private $guidances;
 	private $interests;
+	private $mural;
 
 	public function __construct(){
 		$this->post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
@@ -13,14 +14,42 @@ class homeController extends controller {
 		$this->user = new Users();
 		$this->guidances = new Guidances();
 		$this->interests = new Interest();
+		$this->mural = new Mural();
     }
 
 	public function index() {
 		$this->array['guidances'] = $this->guidances->list();
 		$this->array['interests'] = $this->interests->list();
 		$this->array['colors'] = $this->colors();
+		$this->array['success'] = (isset($this->get['success']))?true:false;
 
 		$this->loadTemplate('home', $this->array);
+	}
+
+	/**
+	 * register public
+	 */
+	public function register()
+	{
+		if (!empty($this->post)) {
+			$this->post = array_filter($this->post);
+			$this->post['message'] = $this->message($this->post);
+			if (!empty($this->post['complement'])) {
+				$this->post['status'] = 0;
+			}
+			foreach ($this->colors() as $key => $value) {
+				if ($key == $this->post['color']) {
+					$this->post['color'] = $value['color'];
+				}
+			}
+			$this->mural->set($this->post);
+
+			if (!empty($this->post['complement'])) {
+				header('Location: '.BASE.'?success=true&status=true');
+				exit;
+			}
+			header('Location: '.BASE.'?success=true');
+		}
 	}
 
 	/**

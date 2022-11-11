@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Mural</title>
+    <title>Mural do Romance</title>
     <link rel="icon" href="" type="image/x-icon"/>
     <link rel="stylesheet" href="<?=BASE; ?>assets/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="<?=BASE; ?>assets/css/fontawesome/css/all.min.css">
@@ -28,7 +28,7 @@
         <span class="icon-bar"></span>                        
       </button>
       <a class="navbar-brand" href="<?=(!empty($_SESSION['cLogin']))?BASE.'admin':BASE ?>">
-        <span class="ef">Meu</span> Mural 
+        <span class="ef">Mural</span> do Romance 
         <i class="fas fa-pencil-alt"></i>
       </a>
     </div>
@@ -36,8 +36,8 @@
       <ul class="nav navbar-nav navbar-right">
         <?php if(!empty($_SESSION['cLogin'])): ?>
           <li>
-            <a href="<?=BASE; ?>admin">
-              <i class="fas fa-tachometer-alt"></i> Dashboard
+            <a href="<?=BASE; ?>mural">
+              <i class="fas fa-pencil-alt"></i> Mural
             </a>
           </li>
           <li>
