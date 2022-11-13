@@ -12,6 +12,10 @@
 <body>
 
     <section class="print-mural container">
+        <div class="alert alert-info" id="copy-image" data-clipboard-target="#foo">
+            <span>Copie a imagem abaixo e cole onde desejar!</span>
+        </div>
+        
         <div id="result">
             <?php if(!empty($listApproved)): ?>
                 <?php foreach ($listApproved as $value): ?>
@@ -27,12 +31,12 @@
     <script src="<?=BASE; ?>assets/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
     <script src="<?=BASE; ?>assets/js/html2canvas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
   </script>
 
     <script>
 		$(document).ready(function()
 		{
-
             setTimeout(() => {
                 takeshot();
             }, 500);
@@ -42,11 +46,13 @@
 
                 html2canvas(div).then(
                     function (canvas) {
-                        let img = `<img width='100%' src="${canvas.toDataURL()}">`;
+                        let img = `<img width='100%' id="foo" src="${canvas.toDataURL()}">`;
+
+                        // console.log(canvas.toDataURL());
+
                         $(div).html(`${img}`);
                     })
             }
-
 		});	
 	</script>
 </body>

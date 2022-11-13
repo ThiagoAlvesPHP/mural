@@ -8,13 +8,17 @@ class homeController extends controller {
 	private $interests;
 	private $mural;
 
-	public function __construct(){
+	public function __construct()
+	{
 		$this->post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 		$this->get = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 		$this->user = new Users();
 		$this->guidances = new Guidances();
 		$this->interests = new Interest();
 		$this->mural = new Mural();
+
+		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
+		$this->mural->clean($date);
     }
 
 	public function index() {

@@ -12,6 +12,9 @@ class adminController extends controller {
 		$this->user = new Users();
 		$this->user->logado();
 		$this->mural = new Mural();
+
+		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
+		$this->mural->clean($date);
     }
 
 	public function index() {

@@ -41,11 +41,6 @@
             </a>
           </li>
           <li>
-            <a href="<?=BASE; ?>users">
-              <i class="fas fa-users"></i> Usuários
-            </a>
-          </li>
-          <li>
             <a href="<?=BASE; ?>guidance">
               <i class="fas fa-genderless"></i> Orientação
             </a>

@@ -74,15 +74,4 @@ class muralController extends controller {
 			header('Location: '.BASE.'admin?approved=true');
 		}
 	}
-
-	/**
-	 * logout
-	 */
-	public function logout()
-	{
-		if (!empty($_SESSION['cLogin'])) {
-			unset($_SESSION['cLogin']);
-		}
-		header('Location: '.BASE);
-	}
 }

@@ -89,4 +89,11 @@ class Mural extends model{
 
 		return ($sql->rowCount() == 0)?true:false;
 	}
+	/**
+	 * clean
+	 */
+	public function clean($date)
+	{
+		$this->db->query("DELETE FROM ".Mural::TABLE." WHERE DATE(created_at) <= '{$date}'");
+	}
 }

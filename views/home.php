@@ -7,7 +7,7 @@
         <div class="alert <?=(!empty($_GET['status']))?'alert-warning':'alert-success'; ?> alert-dismissible">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <span class="text">
-                <?=(!empty($_GET['status']))?'Sua mensagem esta em processo de aprovação!':'Sua mensagem foi puclicada com sucesso!'; ?>
+                <?=(!empty($_GET['status']))?'Sua mensagem esta em processo de aprovação. Aguarde!':'Sua mensagem foi puclicada com sucesso!'; ?>
             </span>
         </div>
     <?php endif; ?>
@@ -17,21 +17,21 @@
             <div class="row">
                 <div class="col-sm-6">
                     <label for="name">Nome:</label>
-                    <input type="text" name="name" value="Thiago Alves" class="form-control" id="name" required>
+                    <input type="text" name="name" class="form-control" id="name" required>
                 </div>
                 <div class="col-sm-6">
                     <label for="email">E-mail:</label>
-                    <input type="email" name="email" value="teste@teste.com" class="form-control" id="email" required>
+                    <input type="email" name="email" class="form-control" id="email" required>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
                     <label for="whatsapp">Whatsapp:</label>
-                    <input type="text" name="whatsapp" value="73999412514" class="form-control" id="whatsapp" required>
+                    <input type="text" name="whatsapp" class="form-control" id="whatsapp" required>
                 </div>
                 <div class="col-sm-6">
                     <label for="age">Idade:</label>
-                    <input type="number" name="age" value="37" class="form-control" id="age" required>
+                    <input type="number" name="age" class="form-control" id="age" required>
                 </div>
             </div>
         </div>

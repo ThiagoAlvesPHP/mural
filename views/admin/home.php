@@ -8,6 +8,11 @@
                 <span>Mural</span> 
                 <i class="fas fa-pencil-alt"></i>
             </a>
+            <h3>Infomativo</h3>
+            <div class="alert alert-warning">
+                <i class="fas fa-trash-alt"></i>
+                <span>Limpeza automática de publicações de 07 dias para trás</span>
+            </div>
         </div>
         <div class="col-sm-6">
             <h3>Publicações Pendentes</h3>
