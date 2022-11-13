@@ -21,8 +21,18 @@ class adminController extends controller {
 		$this->array['listPending'] = $this->mural->listPending();
 		$this->array['delete'] = (isset($this->get['delete']))?true:false;
 		$this->array['approved'] = (isset($this->get['approved']))?true:false;
+		$this->array['user'] = $this->user->find($_SESSION['cLogin']);
 
 		$this->loadTemplate('admin/home', $this->array);
+	}
+
+	/**
+	 * update mode
+	 */
+	public function mode($id = "")
+	{
+		$this->user->update(["mode" => ($id)?"0":"1"]);
+		header('Location: '.BASE.'admin');
 	}
 
 	/**

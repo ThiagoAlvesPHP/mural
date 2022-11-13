@@ -57,7 +57,7 @@
           </li>
         <?php else: ?>
           <li><a href="<?=BASE; ?>">Home</a></li>
-          <li><a href="<?=BASE; ?>home/login">Login</a></li>
+          <li><a href="<?=BASE; ?>home/mural">Ver Mural</a></li>
         <?php endif; ?>
       </ul>
     </div>
@@ -69,6 +69,14 @@
 <div class="container">
     <?php $this->loadViewInTemplate($viewName, $viewData); ?>   
 </div>
+
+<?php if(empty($_SESSION['cLogin'])): ?>
+  <div class="config">
+    <a href="<?=BASE; ?>home/login" class="link">
+      <i class="fas fa-cogs"></i>
+    </a>
+  </div>
+<?php endif; ?>
 
 <!-- AQUI COLOCAREMOS O FOOTER -->
 <script src="<?=BASE; ?>assets/js/bootstrap.min.js"></script>

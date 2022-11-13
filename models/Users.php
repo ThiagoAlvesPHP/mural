@@ -1,14 +1,18 @@
 <?php
-class Users extends model{
+class Users extends model 
+{
+	
+	const TABLE = "users";
+
 	/**
 	 * Login user
 	 */
 	public function login($post){
-		$sql = $this->db->prepare('
-			SELECT id FROM users 
+		$sql = $this->db->prepare("
+			SELECT id FROM ".Users::TABLE." 
 			WHERE email = :email
 			AND pass = :pass
-		');
+		");
 		$sql->bindValue(':email', $post['email']);
 		$sql->bindValue(':pass', md5($post['pass']));
 		$sql->execute();
@@ -30,19 +34,22 @@ class Users extends model{
 			header('Location: '.BASE);
 		}
 	}
-	//selecionar dados de cliente
-	public function get($id){
+	/**
+	 * find
+	 */
+	public function find($id){
 		$sql = $this->db->query("
-			SELECT * FROM cad_clientes 
+			SELECT * FROM ".Users::TABLE." 
 			WHERE id = '{$id}' 
 		");
 
 		return $sql->fetch(PDO::FETCH_ASSOC);
 	}
+
 	//dados do config
 	public function verificarEmail($email){
 		$sql = $this->db->query("
-			SELECT * FROM cad_clientes 
+			SELECT * FROM ".Users::TABLE." 
 			WHERE email = '{$email}' 
 		");
 
@@ -59,7 +66,7 @@ class Users extends model{
             $fields[] = "$key=:$key";
         }
         $fields = implode(', ', $fields);
-		$sql = $this->db->prepare("INSERT INTO cad_clientes SET {$fields}");
+		$sql = $this->db->prepare("INSERT INTO ".Users::TABLE." SET {$fields}");
 
 		foreach ($post as $key => $value) {
             $sql->bindValue(":{$key}", $value);
@@ -76,7 +83,7 @@ class Users extends model{
         }
         $fields = implode(', ', $fields);
 		$sql = $this->db->prepare("
-			UPDATE cad_clientes 
+			UPDATE ".Users::TABLE." 
 			SET {$fields}
 			WHERE id = '{$post['id']}'
 		");
@@ -85,5 +92,37 @@ class Users extends model{
             $sql->bindValue(":{$key}", $value);
         }
 		$sql->execute();
+	}
+
+	/**
+	 * update all mode
+	 */
+	public function update($post)
+	{
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("
+			UPDATE ".Users::TABLE." 
+			SET {$fields}
+		");
+
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
+	}
+	/**
+	 * find mode
+	 */
+	public function findMode()
+	{
+		$sql = "SELECT mode FROM ".Users::TABLE."";
+		$sql = $this->db->query($sql);
+		// var_dump($sql);
+		// exit;
+		return $sql->fetch(PDO::FETCH_ASSOC);
 	}
 }

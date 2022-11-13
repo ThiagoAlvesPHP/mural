@@ -8,6 +8,18 @@
                 <span>Mural</span> 
                 <i class="fas fa-pencil-alt"></i>
             </a>
+
+            <div class="row mode">
+                <div class="col-sm-6">
+                    <a href="<?=BASE; ?>admin/mode/<?=$user['mode']; ?>" class="btn btn-<?=(!$user['mode'])?'success':'danger' ?> btn-lg btn-block"><span>Modo <?=($user['mode'])?'Automático':'Manual' ?></span></a>
+                </div>
+                <div class="col-sm-6 text">
+                    <div class="alert text-center">
+                        Modo <span><?=(!$user['mode'])?'Automático':'Manual' ?></span> Ligado <i class="far fa-lightbulb"></i>
+                    </div>
+                </div>
+            </div>
+
             <h3>Infomativo</h3>
             <div class="alert alert-warning">
                 <i class="fas fa-trash-alt"></i>

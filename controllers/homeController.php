@@ -36,11 +36,17 @@ class homeController extends controller {
 	public function register()
 	{
 		if (!empty($this->post)) {
+			$mode = $this->user->findMode();
+
 			$this->post = array_filter($this->post);
 			$this->post['message'] = $this->message($this->post);
-			if (!empty($this->post['complement'])) {
-				$this->post['status'] = 0;
+
+			if ($mode['mode']) {
+				if (!empty($this->post['complement'])) {
+					$this->post['status'] = '0';
+				}
 			}
+
 			foreach ($this->colors() as $key => $value) {
 				if ($key == $this->post['color']) {
 					$this->post['color'] = $value['color'];
@@ -48,12 +54,25 @@ class homeController extends controller {
 			}
 			$this->mural->set($this->post);
 
-			if (!empty($this->post['complement'])) {
-				header('Location: '.BASE.'?success=true&status=true');
-				exit;
+			if ($mode['mode']) {
+				if (!empty($this->post['complement'])) {
+					header('Location: '.BASE.'?success=true&status=true');
+					exit;
+				}
 			}
+			
 			header('Location: '.BASE.'?success=true');
 		}
+	}
+
+	/**
+	 * mural
+	 */
+	public function mural()
+	{
+		$this->array['listApproved'] = $this->mural->listApproved();
+		
+		$this->loadTemplate('mural', $this->array);
 	}
 
 	/**
