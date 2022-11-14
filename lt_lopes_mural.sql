@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 09/11/2022 às 05:02
+-- Tempo de geração: 13/11/2022 às 16:31
 -- Versão do servidor: 5.7.39-0ubuntu0.18.04.2
 -- Versão do PHP: 7.4.32
 
@@ -85,10 +85,10 @@ CREATE TABLE `mural` (
   `age` int(11) DEFAULT NULL,
   `guidance` varchar(80) DEFAULT NULL,
   `interest` varchar(80) DEFAULT NULL,
-  `complement` text NOT NULL,
   `color` varchar(10) NOT NULL,
+  `complement` text,
   `message` longtext NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -103,6 +103,7 @@ CREATE TABLE `users` (
   `name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `pass` varchar(32) NOT NULL,
+  `mode` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -110,8 +111,8 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `pass`, `created_at`) VALUES
-(1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500', '2022-11-08 21:02:06');
+INSERT INTO `users` (`id`, `name`, `email`, `pass`, `mode`, `created_at`) VALUES
+(1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500', 0, '2022-11-13 20:05:43');
 
 --
 -- Índices de tabelas apagadas
@@ -149,13 +150,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `guidance`
 --
 ALTER TABLE `guidance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `interest`
 --
 ALTER TABLE `interest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `mural`

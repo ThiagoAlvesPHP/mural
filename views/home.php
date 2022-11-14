@@ -115,4 +115,20 @@
             <span>Publicar</span>
         </button>
     </form>
+
+    <hr>
+
+    <div class="well" id="mural">
+        <div class="form-group guidances">
+            <p class="title">Mural</p>
+        </div>
+
+        <?php if(!empty($listApproved)): ?>
+            <?php foreach ($listApproved as $value): ?>
+                <div class="alert" style="background-color: <?=$value['color']; ?>;">
+                    <span><?=$value['message']; ?></span>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 </section>

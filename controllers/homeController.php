@@ -27,6 +27,8 @@ class homeController extends controller {
 		$this->array['colors'] = $this->colors();
 		$this->array['success'] = (isset($this->get['success']))?true:false;
 
+		$this->array['listApproved'] = $this->mural->listApproved();
+
 		$this->loadTemplate('home', $this->array);
 	}
 

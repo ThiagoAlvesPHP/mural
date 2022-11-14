@@ -57,7 +57,7 @@
           </li>
         <?php else: ?>
           <li><a href="<?=BASE; ?>">Home</a></li>
-          <li><a href="<?=BASE; ?>home/mural">Ver Mural</a></li>
+          <li><a href="#mural">Ver Mural</a></li>
         <?php endif; ?>
       </ul>
     </div>
@@ -71,9 +71,9 @@
 </div>
 
 <?php if(empty($_SESSION['cLogin'])): ?>
-  <div class="config">
+  <div class="config container">
     <a href="<?=BASE; ?>home/login" class="link">
-      <i class="fas fa-cogs"></i>
+      <i class="fas fa-ellipsis-h"></i>
     </a>
   </div>
 <?php endif; ?>

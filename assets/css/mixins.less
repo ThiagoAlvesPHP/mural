@@ -85,6 +85,7 @@ label, span {
     
         .lb {
             &:first-child {
+                transform: rotate(-25deg);
                 width: 350px;
                 left: -45px;
     
@@ -94,7 +95,7 @@ label, span {
             }
             &:last-child {
                 width: 320px;
-                left: -120px;
+                left: 0px;
             }
         }
     
@@ -126,15 +127,9 @@ label, span {
 }
 
 .config {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    height: 40px;
-    width: 40px;
-    background-color: #FFF;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
-    border-radius: 50%;
-    box-shadow: 0px 0px 5px;
+    height: 60px;
+    padding: 20px;
 }
