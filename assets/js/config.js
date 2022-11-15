@@ -2,7 +2,7 @@
 var url_local = window.location.href;
 //produção
 if (url_local.indexOf('localhost') == -1) {
-    var url = 'https://www.optimus.mdsystemweb.com.br/';
+    var url = 'https://muraldoromance.com/';
 }
 //desenvolvimento
 else {

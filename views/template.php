@@ -72,8 +72,9 @@
 
 <?php if(empty($_SESSION['cLogin'])): ?>
   <div class="config container">
+    ................................................
     <a href="<?=BASE; ?>home/login" class="link">
-      <i class="fas fa-ellipsis-h"></i>
+      .
     </a>
   </div>
 <?php endif; ?>
