@@ -26,6 +26,14 @@ class homeController extends controller {
 		$this->array['interests'] = $this->interests->list();
 		$this->array['colors'] = $this->colors();
 		$this->array['success'] = (isset($this->get['success']))?true:false;
+		$url = explode('.', $_SERVER['HTTP_HOST']);
+		
+		// if ($url[0] == "www") {
+		// 	header("Location: ".BASE);
+		// }
+		// if (!isset($_SERVER['HTTPS'])) {
+		// 	header("Location: ".BASE);
+		// }
 
 		$this->array['listApproved'] = $this->mural->listApproved();
 

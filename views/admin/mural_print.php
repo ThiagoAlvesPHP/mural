@@ -20,7 +20,7 @@
             <?php if(!empty($listApproved)): ?>
                 <?php foreach ($listApproved as $value): ?>
                     <div class="alert" style="background-color: <?=$value['color']; ?>;">
-                        <span><?=$value['message']; ?></span>
+                        <span><?=$value['message']; ?> <?=$value['complement']; ?></span>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>

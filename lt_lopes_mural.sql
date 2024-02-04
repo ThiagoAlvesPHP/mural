@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 13/11/2022 às 16:31
--- Versão do servidor: 5.7.39-0ubuntu0.18.04.2
--- Versão do PHP: 7.4.32
+-- Host: localhost:3306
+-- Tempo de geração: 04/02/2024 às 11:07
+-- Versão do servidor: 5.7.23-23
+-- Versão do PHP: 8.1.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `lt_lopes_mural`
+-- Banco de dados: `murald43_mural`
 --
 
 -- --------------------------------------------------------
@@ -39,14 +38,15 @@ CREATE TABLE `guidance` (
 --
 
 INSERT INTO `guidance` (`id`, `title`, `created_at`) VALUES
-(1, 'Heterossexual', '2022-11-09 09:52:58'),
-(2, 'Bissexual', '2022-11-09 09:53:09'),
-(3, 'Lésbica Ativa-indiscreta', '2022-11-09 10:07:47'),
-(4, 'Lésbica Ativa-discreta', '2022-11-09 09:53:39'),
-(5, 'Lésbica Passiva', '2022-11-09 09:53:47'),
-(6, 'Homossexual  Ativo', '2022-11-09 10:20:02'),
-(7, 'Homossexual Passivo-discreto', '2022-11-09 09:54:01'),
-(8, 'Homossexual Passivo indiscreto', '2022-11-09 09:54:06');
+(1, 'Heterossexual - [Para o Sexo o OPOSTO]', '2023-07-18 12:40:56'),
+(2, 'Bissexual - [Para QUALQUER dos Sexos]', '2023-07-18 12:41:16'),
+(3, 'Lésbica Ativa-indiscreta - [para o mesmo Sexo]', '2023-07-18 12:41:28'),
+(4, 'Lésbica Ativa-discreta - [para o mesmo Sexo]', '2023-07-18 12:41:45'),
+(5, 'Lésbica Passiva - [para o mesmo Sexo]', '2023-07-18 12:41:58'),
+(6, 'Homossexual  Ativo - [para o mesmo Sexo]', '2023-07-18 12:42:12'),
+(7, 'Homossexual Passivo-discreto - [para o mesmo Sexo]', '2023-07-18 12:42:27'),
+(8, 'Homossexual Passivo indiscreto - [para o mesmo Sexo]', '2023-07-18 12:42:47'),
+(9, 'Hetero+comCuriosidade - [Para o MESMO Sexo]', '2023-07-18 12:43:05');
 
 -- --------------------------------------------------------
 
@@ -92,6 +92,14 @@ CREATE TABLE `mural` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Despejando dados para a tabela `mural`
+--
+
+INSERT INTO `mural` (`id`, `name`, `email`, `whatsapp`, `age`, `guidance`, `interest`, `color`, `complement`, `message`, `status`, `created_at`) VALUES
+(268, 'okjUvbBWJwP', 'angela.dolittle1984@yahoo.com', 'arScIgqMUXlyYHFT', 0, 'Hetero+comCuriosidade - [Para o MESMO Sexo]', 'Primeiro Sexo', '#443d3d', 'deBgFNPvDEapyq', 'OI, ME CHAMO okjUvbBWJwP, MINHA ORIENTAÇÃO SEXUAL É Hetero+comCuriosidade - [Para o MESMO Sexo], TENHO AxtcmgHM ANOS. MEU E-MAIL É: angela.dolittle1984@yahoo.com / E MEU WHATSAPP É: arScIgqMUXlyYHFT, TENHO INTERESSE EM Primeiro Sexo.', 1, '2024-01-29 23:26:32'),
+(269, 'okjUvbBWJwP', 'angela.dolittle1984@yahoo.com', 'arScIgqMUXlyYHFT', 0, 'Hetero+comCuriosidade - [Para o MESMO Sexo]', 'Primeiro Sexo', '#443d3d', 'deBgFNPvDEapyq', 'OI, ME CHAMO okjUvbBWJwP, MINHA ORIENTAÇÃO SEXUAL É Hetero+comCuriosidade - [Para o MESMO Sexo], TENHO AxtcmgHM ANOS. MEU E-MAIL É: angela.dolittle1984@yahoo.com / E MEU WHATSAPP É: arScIgqMUXlyYHFT, TENHO INTERESSE EM Primeiro Sexo.', 1, '2024-01-29 23:26:35');
+
 -- --------------------------------------------------------
 
 --
@@ -112,10 +120,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `mode`, `created_at`) VALUES
-(1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500', 0, '2022-11-13 20:05:43');
+(1, 'Admin', 'admin@admin.com', '0192023a7bbd73250516f069df18b500', 0, '2023-05-26 04:22:02');
 
 --
--- Índices de tabelas apagadas
+-- Índices para tabelas despejadas
 --
 
 --
@@ -143,14 +151,14 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `guidance`
 --
 ALTER TABLE `guidance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `interest`
@@ -162,7 +170,7 @@ ALTER TABLE `interest`
 -- AUTO_INCREMENT de tabela `mural`
 --
 ALTER TABLE `mural`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
 
 --
 -- AUTO_INCREMENT de tabela `users`

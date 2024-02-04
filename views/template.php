@@ -70,14 +70,12 @@
     <?php $this->loadViewInTemplate($viewName, $viewData); ?>   
 </div>
 
-<?php if(empty($_SESSION['cLogin'])): ?>
-  <div class="config container">
-    ................................................
-    <a href="<?=BASE; ?>home/login" class="link">
-      .
-    </a>
-  </div>
-<?php endif; ?>
+<div class="config container">
+  ................................................
+  <a href="<?=BASE; ?>home/login" class="link">
+    .
+  </a>
+</div>
 
 <!-- AQUI COLOCAREMOS O FOOTER -->
 <script src="<?=BASE; ?>assets/js/bootstrap.min.js"></script>

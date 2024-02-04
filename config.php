@@ -13,11 +13,11 @@ if (!empty($match)) {
 	$config['dbuser'] = 'root';
 	$config['dbpass'] = 'root';
 } else {
-	define("BASE", "");
-	$config['dbname'] = '';
+	define("BASE", "https://muraldoromance.com/");
+	$config['dbname'] = 'murald43_mural';
 	$config['host'] = 'localhost';
-	$config['dbuser'] = '';
-	$config['dbpass'] = '';
+	$config['dbuser'] = 'murald43_admin';
+	$config['dbpass'] = 'romance2022';
 }
 
 global $db;
