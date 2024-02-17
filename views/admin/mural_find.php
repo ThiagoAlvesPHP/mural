@@ -11,13 +11,17 @@
     <form id="form">
         <div class="form-group">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <label for="name">Nome:</label>
                     <input type="text" value="<?=$find['name']; ?>" class="form-control" id="name" readonly disabled>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <label for="email">E-mail:</label>
                     <input type="email" value="<?=$find['email']; ?>" class="form-control" id="email" readonly disabled>
+                </div>
+                <div class="col-sm-4">
+                    <label for="city">Cidade:</label>
+                    <input type="city" value="<?=$find['city']; ?>" class="form-control" id="city" readonly disabled>
                 </div>
             </div>
             <div class="row">

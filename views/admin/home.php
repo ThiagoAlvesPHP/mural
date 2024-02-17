@@ -11,7 +11,7 @@
 
             <div class="row mode">
                 <div class="col-sm-6">
-                    <a href="<?=BASE; ?>admin/mode/<?=$user['mode']; ?>" class="btn btn-<?=(!$user['mode'])?'success':'danger' ?> btn-lg btn-block"><span>Modo <?=($user['mode'])?'Automático':'Manual' ?></span></a>
+                    <a href="<?=BASE; ?>admin/mode/<?=$user['mode']; ?>" class="btn btn-<?=(!$user['mode'])?'danger':'success' ?> btn-lg btn-block"><span>Modo <?=($user['mode'])?'Automático':'Manual' ?></span></a>
                 </div>
                 <div class="col-sm-6 text">
                     <div class="alert text-center">

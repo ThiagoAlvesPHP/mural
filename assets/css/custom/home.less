@@ -1,4 +1,23 @@
 .home {
+    .signs {
+        display: flex;
+        background-color: @color-fifth;
+        padding: 10px;
+        position: sticky;
+        z-index: -1;
+        border-radius: 5px;
+        box-shadow: 3px 3px 3px;
+
+        .content {
+            .text {
+                font-size: 22px;
+                color: @color-third;
+                font-weight: 600;
+                letter-spacing: 3px;
+            }
+        }
+    }
+
     .title {
         text-align: center;
         font-family: 'MsMadi';
@@ -13,19 +32,18 @@
 
     form {
         margin: 20px 0;
-        
+
         .form-group {
             .group-radios {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
 
                 .radio-inline {
+                    width: 100%;
                     padding: 10px;
                     border: 1px solid @color-bedroom;
                     border-radius: 5px;
-                    width: 45%;
                     margin: 5px;
                     display: flex;
                     justify-content: center;
@@ -87,6 +105,35 @@
             }
         }
     }
+
+    #mural {
+        .alert {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+
+            .user-photo {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            span {
+                text-align: center;
+            }
+        }
+    }
+
+    .republish {
+        .button-action {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    }
 }
 
 @media @desktop {
@@ -94,9 +141,9 @@
         form {
             .form-group {
                 .group-radios {
-                    .radio-inline {
-                        width: 22%;
+                    grid-template-columns: 1fr 1fr;
 
+                    .radio-inline {
                         span {
                             font-size: 14px;
                         }

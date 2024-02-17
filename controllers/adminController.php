@@ -33,6 +33,7 @@ class adminController extends controller {
 	{
 		$this->user->update(["mode" => ($id)?"0":"1"]);
 		header('Location: '.BASE.'admin');
+		exit;
 	}
 
 	/**
@@ -44,5 +45,6 @@ class adminController extends controller {
 			unset($_SESSION['cLogin']);
 		}
 		header('Location: '.BASE);
+		exit;
 	}
 }
