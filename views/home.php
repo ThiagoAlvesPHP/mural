@@ -16,138 +16,122 @@
 
     <?php require 'components/img-effects.php'; ?>
 
-    <?php if ($success) : ?>
-        <?php if ($_GET['success'] == "true") : ?>
-            <div class="alert <?= (!empty($_GET['status'])) ? 'alert-warning' : 'alert-success'; ?> alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <span class="text">
-                    <?= (!empty($_GET['status'])) ? 'Sua mensagem esta em processo de aprovação. Aguarde!' : 'Sua mensagem foi puclicada com sucesso! - Em 07 dias ela será excluída! - <p>Algumas mensagens podem ser premiadas ficando mais tempo no ar</p>'; ?>
-                </span>
-            </div>
-        <?php else : ?>
-            <div class="alert alert-danger alert-dismissible">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <span class="text">
-                    Error ao enviar seus dados, verifique as informações enviadas e formato de foto!
-                </span>
-            </div>
-        <?php endif; ?>
-    <?php endif; ?>
-
-    <div class="row">
-        <div class="col-sm-8">
-            <form action="<?= BASE; ?>home/register" method="POST" id="form" enctype="multipart/form-data">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="name">Nome:</label>
-                            <input type="text" name="name" class="form-control" value="<?= (!empty($find)) ? $find['name'] : ""; ?>" id="name" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="email">E-mail:</label>
-                            <input type="email" name="email" class="form-control" value="<?= (!empty($find)) ? $find['email'] : ""; ?>" id="email" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="city">Cidade:</label>
-                            <input type="city" name="city" class="form-control" value="<?= (!empty($find)) ? $find['city'] : ""; ?>" id="city" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="whatsapp">Whatsapp:</label>
-                            <input type="text" name="whatsapp" class="form-control" id="whatsapp" value="<?= (!empty($find)) ? $find['whatsapp'] : ""; ?>" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="age">Idade: <small>Maior de 18 anos</small></label>
-                            <input type="number" min="18" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="photo">Foto: <small>Proibido Nudes ('png', 'jpg', 'jpeg')</small></label>
-                            <input type="file" name="photo" class="form-control" id="photo">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group guidances">
-                    <p class="title">Orientação</p>
-                    <div class="group-radios">
-                        <?php if (!empty($guidances)) : ?>
-                            <?php foreach ($guidances as $value) : ?>
-                                <label class="radio-inline <?= (!empty($find) && $find['guidance_id'] == $value['id']) ? "active" : ""; ?>">
-                                    <input type="radio" <?= (!empty($find) && $find['guidance_id'] == $value['id']) ? "checked" : ""; ?> name="guidance" id="guidances<?= $value['id'] ?>" value="<?= $value['id'] . ":" . $value['title']; ?>" required>
-                                    <span><?= $value['title'] ?></span>
-                                </label>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="form-group interests">
-                    <p class="title">Interesse</p>
-                    <div class="group-radios">
-                        <?php if (!empty($interests)) : ?>
-                            <?php foreach ($interests as $value) : ?>
-                                <label class="radio-inline <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "active" : ""; ?>">
-                                    <input type="radio" <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "checked" : ""; ?> name="interest" id="interests<?= $value['id'] ?>" value="<?= $value['id'] . ":" . $value['title']; ?>" required>
-                                    <span><?= $value['title'] ?></span>
-                                </label>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
-                </div>
-                <div class="form-group colors">
-                    <p class="title">Cor da Publicação</p>
-                    <div class="error"></div>
-                    <div class="group-radios">
-                        <?php if (!empty($colors)) : ?>
-                            <?php foreach ($colors as $key => $value) : ?>
-                                <label class="radio-inline <?= (!empty($find) && $find['color'] == $value['color']) ? "active" : ""; ?>">
-                                    <input type="radio" name="color" <?= (!empty($find) && $find['color'] == $value['color']) ? "checked" : ""; ?> value="<?= $key; ?>" required>
-                                    <i class="fas fa-star" style="color: <?= $value['color'] ?>;"></i>
-                                </label>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <div id="result">
-                    <?php if (!empty($find)) : ?>
-                        <div class="alert alert-info">
-                            <span style="color: <?= $find['color']; ?>;">
-                                <?= $find['message']; ?>
-                            </span>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <div class="form-group">
-                    <div class="row complement" style="<?= (!empty($find)) ? "display: block;" : ""; ?>">
-                        <div class="col-sm-6">
-                            <label for="complement">Complemento <small>(Opcional)</small></label>
-                        </div>
-                        <div class="col-sm-6" data-toggle="collapse" data-target="#demo">
-                            <span>Abrir Complemento</span> <i class="fas fa-chevron-down"></i>
-                        </div>
-                    </div>
-
-                    <div id="demo" class="collapse">
-                        <textarea name="complement" id="complement" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <button type="submit" <?= (!empty($find)) ? "" : "disabled"; ?> class="btn btn-success btn-block btn-lg">
-                    <span>Publicar</span>
-                </button>
-            </form>
+    <?php if (!empty($_SESSION['alert'])) : ?>
+        <div class="alert alert-<?= $_SESSION['alert']['class'] ?> alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <?= $_SESSION['alert']['message']; ?>
         </div>
-        <div class="col-sm-4">
-            <h4>Banner</h4>
+    <?php unset($_SESSION['alert']);
+    endif; ?>
+
+    <form action="<?= BASE; ?>home/register" method="POST" id="form" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="name">Nome:</label>
+                    <input type="text" name="name" class="form-control" value="<?= (!empty($find)) ? $find['name'] : ""; ?>" id="name" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="email">E-mail:</label>
+                    <input type="email" name="email" class="form-control" value="<?= (!empty($find)) ? $find['email'] : ""; ?>" id="email" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="city">Cidade:</label>
+                    <input type="city" name="city" class="form-control" value="<?= (!empty($find)) ? $find['city'] : ""; ?>" id="city" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="whatsapp">Whatsapp:</label>
+                    <input type="text" name="whatsapp" class="form-control" id="whatsapp" value="<?= (!empty($find)) ? $find['whatsapp'] : ""; ?>" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="age">Idade: <small>Maior de 18 anos</small></label>
+                    <input type="number" min="18" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age" required>
+                </div>
+                <div class="col-sm-6">
+                    <label for="photo">Foto: <small>('png', 'jpg', 'jpeg')</small></label>
+                    <input type="file" name="photo" class="form-control" id="photo">
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="form-group guidances">
+            <p class="title">Orientação</p>
+            <div class="group-radios">
+                <?php if (!empty($guidances)) : ?>
+                    <?php foreach ($guidances as $value) : ?>
+                        <label class="radio-inline <?= (!empty($find) && $find['guidance_id'] == $value['id']) ? "active" : ""; ?>">
+                            <input type="radio" <?= (!empty($find) && $find['guidance_id'] == $value['id']) ? "checked" : ""; ?> name="guidance" id="guidances<?= $value['id'] ?>" value="<?= $value['id'] . ":" . $value['title']; ?>" required>
+                            <span><?= $value['title'] ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="form-group interests">
+            <p class="title">Interesse</p>
+            <div class="group-radios">
+                <?php if (!empty($interests)) : ?>
+                    <?php foreach ($interests as $value) : ?>
+                        <label class="radio-inline <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "active" : ""; ?>">
+                            <input type="radio" <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "checked" : ""; ?> name="interest" id="interests<?= $value['id'] ?>" value="<?= $value['id'] . ":" . $value['title']; ?>" required>
+                            <span><?= $value['title'] ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="form-group colors">
+            <p class="title">Cor da Publicação</p>
+            <div class="error"></div>
+            <div class="group-radios">
+                <?php if (!empty($colors)) : ?>
+                    <?php foreach ($colors as $key => $value) : ?>
+                        <label class="radio-inline <?= (!empty($find) && $find['color'] == $value['color']) ? "active" : ""; ?>">
+                            <input type="radio" name="color" <?= (!empty($find) && $find['color'] == $value['color']) ? "checked" : ""; ?> value="<?= $key; ?>" required>
+                            <i class="fas fa-star" style="color: <?= $value['color'] ?>;"></i>
+                        </label>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div id="result">
+            <?php if (!empty($find)) : ?>
+                <div class="alert alert-info">
+                    <span style="color: <?= $find['color']; ?>;">
+                        <?= $find['message']; ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group">
+            <div class="row complement" style="<?= (!empty($find)) ? "display: block;" : ""; ?>">
+                <div class="col-sm-6">
+                    <label for="complement">Complemente se preferir <small>(Opcional)</small></label>
+                </div>
+                <div class="col-sm-6" data-toggle="collapse" data-target="#demo">
+                    <span>Abrir Complemento</span> <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <div id="demo" class="collapse">
+                <textarea name="complement" id="complement" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <button type="submit" <?= (!empty($find)) ? "" : "disabled"; ?> class="btn btn-success btn-block btn-lg">
+            <span>Publicar</span>
+        </button>
+    </form>
 
     <hr>
 
-    <div class="well" id="mural">
+    <!-- mural atual -->
+    <section class="well" id="mural">
         <div class="form-group guidances">
             <p class="title">Mural Atual</p>
         </div>
@@ -177,7 +161,40 @@
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
-    </div>
+    </section>
+
+    <!-- cassifiados antigos -->
+    <section class="well" id="ca">
+        <div class="form-group guidances">
+            <p class="title">Classificados Antigos</p>
+        </div>
+
+        <?php if (!empty($listOld)) : ?>
+            <?php foreach ($listOld as $value) : ?>
+                <div class="alert list-old" style="background-color: <?= $value['color']; ?>;">
+                    <img src="<?= ($value['photo_valid'] && isset($value['photo']) && file_exists($value['photo'])) ? BASE . $value['photo'] : BASE . 'assets/img/user-default.webp' ?>" class="user-photo" alt="<?= $value['name']; ?>" data-toggle="modal" data-target="#modal<?= $value['id']; ?>">
+
+                    <div class="modal fade" id="modal<?= $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="modalLabelSmall">Foto: de <?= $value['name']; ?></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="<?= ($value['photo_valid'] && file_exists($value['photo'])) ? BASE . $value['photo'] : BASE . 'assets/img/user-default.webp' ?>" width="100%" alt="<?= $value['name']; ?>" data-toggle="modal" data-target="#modal<?= $value['id']; ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span><?= $value['message']; ?> <?= $value['complement']; ?></span>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </section>
 
     <div class="republish">
         <!-- Button trigger modal -->

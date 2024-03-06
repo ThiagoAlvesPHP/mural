@@ -113,7 +113,9 @@ class Mural extends model
 	public function listApproved()
 	{
 		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
-		$sql = "SELECT * FROM " . Mural::TABLE . " WHERE (status = 1 AND DATE(created_at) >= '" . $date . "') OR is_infinite = 1";
+		$sql = "SELECT * FROM " . Mural::TABLE . " WHERE ((status = 1 AND DATE(created_at) >= '" . $date . "') OR is_infinite = 1) AND is_old = 0 AND is_mode_third = 0";
+		// var_dump($sql);
+		// exit;
 		$sql = $this->db->query($sql);
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}

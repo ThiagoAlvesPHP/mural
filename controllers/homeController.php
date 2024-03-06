@@ -9,6 +9,7 @@ class homeController extends controller
 	protected $interests;
 	protected $mural;
 	protected $Sign;
+	protected $blockEmailIp;
 
 	public function __construct()
 	{
@@ -19,6 +20,7 @@ class homeController extends controller
 		$this->interests = new Interest();
 		$this->mural = new Mural();
 		$this->Sign = new Sign();
+		$this->blockEmailIp = new BlockEmailIp();
 
 		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
 		$this->mural->clean($date);
@@ -47,6 +49,7 @@ class homeController extends controller
 		}
 
 		$this->array['listApproved'] = $this->mural->listApproved();
+		$this->array['listOld'] = $this->mural->listOld();
 
 		$this->loadTemplate('home', $this->array);
 	}
@@ -58,6 +61,17 @@ class homeController extends controller
 	{
 		if (!empty($this->post)) {
 			$mode = $this->user->findMode();
+			$this->post['ip'] = $_SERVER['REMOTE_ADDR'];
+			$serach = $this->blockEmailIp->serach($this->post['email'], $this->post['ip']);
+
+			if (count($serach) > 0) {
+				$_SESSION['alert'] = [
+					"class"		=> "warning",
+					"message"	=> "E-mail e IP bloqueado!"
+				];
+				header('Location: ' . BASE);
+				exit;
+			}
 
 			$this->post = array_filter($this->post);
 			$this->post['color'] = $_POST['color'];
@@ -74,7 +88,11 @@ class homeController extends controller
 					move_uploaded_file($_FILES['photo']['tmp_name'], $path);
 					$this->post['photo'] = $path;
 				} else {
-					header('Location: ' . BASE . '?success=false&status=false');
+					$_SESSION['alert'] = [
+						"class"		=> "warning",
+						"message"	=> "Error ao enviar seus dados, verifique as informações enviadas e formato de foto!"
+					];
+					header('Location: ' . BASE);
 					exit;
 				}
 			}
@@ -91,11 +109,16 @@ class homeController extends controller
 			}
 			$this->post['guidance_id'] = explode(":", $this->post['guidance'])[0];
 			$this->post['guidance'] = explode(":", $this->post['guidance'])[1];
-
 			$this->post['interest_id'] = explode(":", $this->post['interest'])[0];
 			$this->post['interest'] = explode(":", $this->post['interest'])[1];
+			$this->post['is_mode_third'] = "0";
 
 			$this->mural->set($this->post);
+
+			$_SESSION['alert'] = [
+				"class"		=> "success",
+				"message"	=> "Sua mensagem esta em processo de aprovação. Aguarde!' : 'Sua mensagem foi puclicada com sucesso! - Em 07 dias ela será excluída! - <p>Algumas mensagens podem ser premiadas ficando mais tempo no ar</p>"
+			];
 
 			header('Location: ' . BASE . '?success=true');
 			exit;
@@ -231,6 +254,10 @@ class homeController extends controller
 	public function message($data)
 	{
 		$message = '';
+
+		$data['guidance'] = explode(":", $data['guidance'])[1];
+
+		print_r($data);
 
 		foreach ($this->colors() as $key => $value) {
 			if ($key == $data['color']) {
