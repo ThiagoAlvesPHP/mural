@@ -32,6 +32,10 @@ span {
         flex: 1;
         position: absolute;
         top: 60px;
+
+        @media @mobile {
+            top: 320px;
+        }
     }
 
     .imgs-kiss {
@@ -65,7 +69,6 @@ span {
         align-items: end;
         overflow: hidden;
         right: -60px;
-        // padding-top: 100px;
 
         img {
             width: 100px;

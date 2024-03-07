@@ -10,6 +10,7 @@ class homeController extends controller
 	protected $mural;
 	protected $Sign;
 	protected $blockEmailIp;
+	protected $banner;
 
 	public function __construct()
 	{
@@ -21,6 +22,7 @@ class homeController extends controller
 		$this->mural = new Mural();
 		$this->Sign = new Sign();
 		$this->blockEmailIp = new BlockEmailIp();
+		$this->banner = new Banner();
 
 		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
 		$this->mural->clean($date);
@@ -33,6 +35,7 @@ class homeController extends controller
 		$this->array['signs'] = $this->Sign->list();
 		$this->array['colors'] = $this->colors();
 		$this->array['success'] = (isset($this->get['success'])) ? true : false;
+		$this->array['banners'] = $this->banner->listActive();
 		$url = explode('.', $_SERVER['HTTP_HOST']);
 
 		// if ($url[0] == "www") {

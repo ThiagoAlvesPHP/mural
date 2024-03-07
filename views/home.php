@@ -1,4 +1,34 @@
 <section class="home">
+    <header class="header">
+        <?php if (!empty($banners)) : ?>
+            <div class="header-carousel">
+                <?php foreach ($banners as $key => $value) : ?>
+                    <div class="item-banner" style="background-image: url('<?= $value['image']; ?>');">
+                        <p class="title">
+                            <?= $value['title']; ?>
+                        </p>
+                        <p class="text">
+                            <?= $value['text']; ?>
+                        </p>
+                        <a href="<?= $value['link']; ?>" target="_blank" class="btn btn-info link">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else : ?>
+            <div class="alert alert-warning">
+                Nenhum registro de banner encontrado!
+            </div>
+        <?php endif; ?>
+    </header>
+
+    <script>
+        $(document).ready(function() {
+            $('.header-carousel').slick();
+        });
+    </script>
+
     <?php if (!empty($signs)) : ?>
         <div class="signs">
             <marquee class="content" behavior="scroll" direction="left" scrollamount="10" loop="infinite">

@@ -1,6 +1,10 @@
 .home {
     position: relative;
 
+    @media @mobile {
+        overflow-x: hidden;
+    }
+
     .signs {
         display: flex;
         background-color: @color-fifth;
@@ -34,6 +38,10 @@
 
     form {
         margin: 20px 0;
+
+        @media @mobile {
+            padding: 0 20px;
+        }
 
         .form-group {
             .group-radios {
@@ -133,6 +141,7 @@
         }
 
         >.list-old {
+
             >img,
             span {
                 opacity: 0.5;
@@ -144,8 +153,8 @@
         .button-action {
             background-color: @color-primary;
             position: fixed;
-            bottom: 20px;
-            left: 15px;
+            top: 80px;
+            right: 15px;
             transition: all ease .5s;
 
             &:hover {

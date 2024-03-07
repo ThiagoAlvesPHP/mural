@@ -24,7 +24,7 @@
     </div>
 
     <!-- header -->
-    <?php require "./views/template-header.php"; ?>
+    <!-- <?php require "./views/template-header.php"; ?> -->
 
     <!-- menu -->
     <nav class="navbar navbar-default">
