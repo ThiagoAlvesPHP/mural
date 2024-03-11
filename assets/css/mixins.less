@@ -18,20 +18,28 @@ h1 {
     transition: all ease .5s;
 }
 
-label, span {
+label,
+span {
     letter-spacing: 2px;
 }
 
 .img-effect-kiss {
-    position: absolute;
-    z-index: -1;
-    top: 60px;
-    left: 0;
     display: flex;
     width: 100%;
 
-    .imgs-kiss, .jovens{
+    .imgs-kiss,
+    .jovens {
         flex: 1;
+        position: absolute;
+        top: 60px;
+
+        @media @mobile {
+            top: 320px;
+        }
+    }
+
+    .imgs-kiss {
+        left: -60px;
     }
 
     .lb {
@@ -42,9 +50,10 @@ label, span {
             left: 0;
 
             img {
-                opacity: .5;
+                // opacity: .5;
             }
         }
+
         &:last-child {
             position: absolute;
             width: 150px;
@@ -58,6 +67,8 @@ label, span {
         display: flex;
         flex-direction: column;
         align-items: end;
+        overflow: hidden;
+        right: -60px;
 
         img {
             width: 100px;
@@ -65,7 +76,10 @@ label, span {
             opacity: .3;
 
             &:first-child {
-                transform: rotate(35deg);
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1) rotate(-35deg);
             }
 
             &:nth-child(2) {
@@ -81,25 +95,32 @@ label, span {
 
 @media @desktop {
     .img-effect-kiss {
-        top: 80px;
-    
+        // top: 80px;
+
         .lb {
             &:first-child {
                 transform: rotate(-25deg);
                 width: 350px;
                 left: -45px;
-    
+
                 img {
-                    opacity: .7;
+                    // opacity: .7;
                 }
             }
+
             &:last-child {
                 width: 320px;
                 left: 0px;
             }
         }
-    
+
+        .imgs-kiss {
+            left: -250px;
+        }
+
         .jovens {
+            right: -200px;
+
             img {
                 width: 200px;
             }
@@ -109,27 +130,35 @@ label, span {
 
 .pulse {
     transform: scale(1);
-	animation: pulse 2s infinite;
+    animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-	0% {
-		transform: scale(0.95);
-	}
+    0% {
+        transform: scale(0.95);
+    }
 
-	70% {
-		transform: scale(1);
-	}
+    70% {
+        transform: scale(1);
+    }
 
-	100% {
-		transform: scale(0.95);
-	}
+    100% {
+        transform: scale(0.95);
+    }
 }
 
 .config {
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: end;
+    flex-direction: column;
     height: 60px;
     padding: 20px;
+
+    .points {
+        display: flex;
+        // display: grid;
+        // width: 100%;
+        // grid-template-columns: 1fr;
+    }
 }

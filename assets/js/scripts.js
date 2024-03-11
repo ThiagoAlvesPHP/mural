@@ -27,6 +27,7 @@ $(function () {
     function preview() {
         let name = $('#name').val();
         let email = $('#email').val();
+        let city = $('#city').val();
         let whatsapp = $('#whatsapp').val();
         let age = $('#age').val();
         let guidance = verify($("[name='guidance']"));
@@ -37,12 +38,23 @@ $(function () {
             let guidance = valueChecked($("[name='guidance']"));
             let interest = valueChecked($("[name='interest']"));
             let color = valueChecked($("[name='color']"));
+
+            let params = {
+                name: name,
+                email: email, 
+                city:city, 
+                whatsapp: whatsapp, 
+                age: age, 
+                guidance: guidance, 
+                interest: interest, 
+                color: color
+            }
             
             $.ajax({
                 method: "POST",
                 url: `${url}home/ajax`,
                 dataType: "json",
-                data: { name: name, email: email, whatsapp: whatsapp, age: age, guidance: guidance, interest: interest, color: color},
+                data: params,
                 beforeSend : function(){
                     $('.loading').show();
                 }
@@ -51,11 +63,15 @@ $(function () {
                 if (data.status) {
                     let html = `<div class="alert alert-info"><span style="color: ${data.data.colorHex};">${data.data.message}</span></div>`;
                     $('#result').html(html);
-                    $('.loading').hide();
+                    setTimeout(() => {
+                        $('.loading').hide();
+                    }, 1000);   
                 }
             })
             .fail(function(jqXHR, textStatus, msg){
-                $('.loading').hide();
+                setTimeout(() => {
+                    $('.loading').hide();
+                }, 1000);
             });
 
             $('.complement').css('display', 'flex')

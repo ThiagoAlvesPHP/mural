@@ -2,20 +2,27 @@
     <h1 class="title"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
     <hr>
 
+    <?php if (!empty($_SESSION['alert'])) : ?>
+        <div class="alert alert-<?= $_SESSION['alert']['class'] ?>">
+            <?= $_SESSION['alert']['message']; ?>
+        </div>
+    <?php unset($_SESSION['alert']);
+    endif; ?>
+
     <div class="row">
         <div class="col-sm-6">
-            <a href="<?=BASE ?>mural" class="btn btn-info btn-block btn-lg">
-                <span>Mural</span> 
+            <a href="<?= BASE ?>mural" class="btn btn-info btn-block btn-lg">
+                <span>Mural</span>
                 <i class="fas fa-pencil-alt"></i>
             </a>
 
             <div class="row mode">
                 <div class="col-sm-6">
-                    <a href="<?=BASE; ?>admin/mode/<?=$user['mode']; ?>" class="btn btn-<?=(!$user['mode'])?'success':'danger' ?> btn-lg btn-block"><span>Modo <?=($user['mode'])?'Automático':'Manual' ?></span></a>
+                    <a href="<?= BASE; ?>admin/mode/<?= $user['mode']; ?>" class="btn btn-<?= (!$user['mode']) ? 'danger' : 'success' ?> btn-lg btn-block"><span>Modo <?= ($user['mode']) ? 'Automático' : 'Manual' ?></span></a>
                 </div>
                 <div class="col-sm-6 text">
                     <div class="alert text-center">
-                        Modo <span><?=(!$user['mode'])?'Automático':'Manual' ?></span> Ligado <i class="far fa-lightbulb"></i>
+                        Modo <span><?= (!$user['mode']) ? 'Automático' : 'Manual' ?></span> Ligado <i class="far fa-lightbulb"></i>
                     </div>
                 </div>
             </div>
@@ -29,12 +36,12 @@
         <div class="col-sm-6">
             <h3>Publicações Pendentes</h3>
 
-            <?php if($delete): ?>
+            <?php if ($delete) : ?>
                 <div class="alert alert-danger">
                     <span class="text">Publicação deletada com sucesso.</span>
                 </div>
             <?php endif; ?>
-            <?php if($approved): ?>
+            <?php if ($approved) : ?>
                 <div class="alert alert-success">
                     <span class="text">Publicação altorizada com sucesso.</span>
                 </div>
@@ -48,22 +55,53 @@
                             <th>Complemento</th>
                         </tr>
                     </thead>
-                    <?php if(!empty($listPending)): ?>
+                    <?php if (!empty($listPending)) : ?>
                         <tbody>
-                            <?php foreach ($listPending as $value): ?>
-                                
+                            <?php foreach ($listPending as $value) : ?>
+
                                 <tr>
                                     <td>
-                                        <a href="<?=BASE; ?>mural/actions?del=<?=$value['id']; ?>" class="btn btn-danger">
+                                        <a href="<?= BASE; ?>mural/actions?del=<?= $value['id']; ?>" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
-                                        <a href="<?=BASE; ?>mural/actions?approved=<?=$value['id']; ?>" class="btn btn-success">
+                                        <a href="<?= BASE; ?>mural/actions?approved=<?= $value['id']; ?>" class="btn btn-success">
                                             <i class="fas fa-check"></i>
                                         </a>
                                     </td>
-                                    <td><?=$value['complement']; ?></td>
+                                    <td><?= $value['complement']; ?></td>
                                 </tr>
-                                
+
+                            <?php endforeach; ?>
+                        </tbody>
+                    <?php endif; ?>
+                </table>
+            </div>
+            <hr>
+
+            <h3>Bloqueios</h3>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="50">Ação</th>
+                            <th>E-mail</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <?php if (!empty($blocks)) : ?>
+                        <tbody>
+                            <?php foreach ($blocks as $value) : ?>
+
+                                <tr>
+                                    <td>
+                                        <a href="<?= BASE; ?>admin/actions?delBlock=<?= $value['id']; ?>" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                    <td><?= $value['email']; ?></td>
+                                    <td><?= $value['ip']; ?></td>
+                                </tr>
+
                             <?php endforeach; ?>
                         </tbody>
                     <?php endif; ?>

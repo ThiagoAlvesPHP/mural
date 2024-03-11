@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Roboto_Medium';
+    scroll-behavior: smooth;
 }
 
 @import 'variables.less';
@@ -13,12 +14,13 @@ body {
 
     @import 'mixins.less';
     @import './custom/loader.less';
-    
+
     @import 'custom/menu.less';
 
     // PAGES
     @import './custom/login.less';
     @import './custom/home.less';
+    @import './custom/header.less';
     @import './custom/admin/mural-find-admin.less';
     @import './custom/admin/print-mural.less';
     @import './custom/admin/home-admin.less';

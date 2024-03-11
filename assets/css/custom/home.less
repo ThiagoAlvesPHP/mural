@@ -1,4 +1,29 @@
 .home {
+    position: relative;
+
+    @media @mobile {
+        overflow-x: hidden;
+    }
+
+    .signs {
+        display: flex;
+        background-color: @color-fifth;
+        padding: 10px;
+        position: sticky;
+        z-index: -1;
+        border-radius: 5px;
+        box-shadow: 3px 3px 3px;
+
+        .content {
+            .text {
+                font-size: 22px;
+                color: @color-third;
+                font-weight: 600;
+                letter-spacing: 3px;
+            }
+        }
+    }
+
     .title {
         text-align: center;
         font-family: 'MsMadi';
@@ -13,19 +38,22 @@
 
     form {
         margin: 20px 0;
-        
+
+        @media @mobile {
+            padding: 0 20px;
+        }
+
         .form-group {
             .group-radios {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
 
                 .radio-inline {
+                    width: 100%;
                     padding: 10px;
                     border: 1px solid @color-bedroom;
                     border-radius: 5px;
-                    width: 45%;
                     margin: 5px;
                     display: flex;
                     justify-content: center;
@@ -87,6 +115,53 @@
             }
         }
     }
+
+    #mural,
+    #ca {
+        .alert {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-content: center;
+            flex-wrap: wrap;
+
+            .user-photo {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            span {
+                text-align: center;
+                padding: 8px;
+                background-color: rgba(255, 255, 255, .7);
+                border-radius: 5px;
+            }
+        }
+
+        >.list-old {
+
+            >img,
+            span {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    .republish {
+        .button-action {
+            background-color: @color-primary;
+            position: fixed;
+            top: 80px;
+            right: 15px;
+            transition: all ease .5s;
+
+            &:hover {
+                box-shadow: 0px 0px 5px;
+            }
+        }
+    }
 }
 
 @media @desktop {
@@ -94,9 +169,9 @@
         form {
             .form-group {
                 .group-radios {
-                    .radio-inline {
-                        width: 22%;
+                    grid-template-columns: 1fr 1fr;
 
+                    .radio-inline {
                         span {
                             font-size: 14px;
                         }

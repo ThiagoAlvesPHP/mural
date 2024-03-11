@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Tempo de geração: 04/02/2024 às 11:07
--- Versão do servidor: 5.7.23-23
--- Versão do PHP: 8.1.27
+-- Host: localhost
+-- Tempo de geração: 08-Fev-2024 às 18:54
+-- Versão do servidor: 8.0.36-0ubuntu0.22.04.1
+-- versão do PHP: 8.2.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,23 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `murald43_mural`
+-- Banco de dados: `lt_lopes_mural`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `guidance`
+-- Estrutura da tabela `guidance`
 --
 
 CREATE TABLE `guidance` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Despejando dados para a tabela `guidance`
+-- Extraindo dados da tabela `guidance`
 --
 
 INSERT INTO `guidance` (`id`, `title`, `created_at`) VALUES
@@ -51,17 +51,17 @@ INSERT INTO `guidance` (`id`, `title`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `interest`
+-- Estrutura da tabela `interest`
 --
 
 CREATE TABLE `interest` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `title` varchar(100) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Despejando dados para a tabela `interest`
+-- Extraindo dados da tabela `interest`
 --
 
 INSERT INTO `interest` (`id`, `title`, `created_at`) VALUES
@@ -74,49 +74,56 @@ INSERT INTO `interest` (`id`, `title`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `mural`
+-- Estrutura da tabela `mural`
 --
 
 CREATE TABLE `mural` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `city` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `photo_valid` tinyint(1) NOT NULL DEFAULT '0',
   `whatsapp` varchar(30) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `guidance_id` int DEFAULT NULL,
   `guidance` varchar(80) DEFAULT NULL,
+  `interest_id` int NOT NULL,
   `interest` varchar(80) DEFAULT NULL,
   `color` varchar(10) NOT NULL,
   `complement` text,
   `message` longtext NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
+  `status` int NOT NULL DEFAULT '1',
+  `is_old` tinyint(1) NOT NULL DEFAULT '0',
+  `is_infinite` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Despejando dados para a tabela `mural`
+-- Extraindo dados da tabela `mural`
 --
 
-INSERT INTO `mural` (`id`, `name`, `email`, `whatsapp`, `age`, `guidance`, `interest`, `color`, `complement`, `message`, `status`, `created_at`) VALUES
-(268, 'okjUvbBWJwP', 'angela.dolittle1984@yahoo.com', 'arScIgqMUXlyYHFT', 0, 'Hetero+comCuriosidade - [Para o MESMO Sexo]', 'Primeiro Sexo', '#443d3d', 'deBgFNPvDEapyq', 'OI, ME CHAMO okjUvbBWJwP, MINHA ORIENTAÇÃO SEXUAL É Hetero+comCuriosidade - [Para o MESMO Sexo], TENHO AxtcmgHM ANOS. MEU E-MAIL É: angela.dolittle1984@yahoo.com / E MEU WHATSAPP É: arScIgqMUXlyYHFT, TENHO INTERESSE EM Primeiro Sexo.', 1, '2024-01-29 23:26:32'),
-(269, 'okjUvbBWJwP', 'angela.dolittle1984@yahoo.com', 'arScIgqMUXlyYHFT', 0, 'Hetero+comCuriosidade - [Para o MESMO Sexo]', 'Primeiro Sexo', '#443d3d', 'deBgFNPvDEapyq', 'OI, ME CHAMO okjUvbBWJwP, MINHA ORIENTAÇÃO SEXUAL É Hetero+comCuriosidade - [Para o MESMO Sexo], TENHO AxtcmgHM ANOS. MEU E-MAIL É: angela.dolittle1984@yahoo.com / E MEU WHATSAPP É: arScIgqMUXlyYHFT, TENHO INTERESSE EM Primeiro Sexo.', 1, '2024-01-29 23:26:35');
+INSERT INTO `mural` (`id`, `name`, `email`, `city`, `photo`, `photo_valid`, `whatsapp`, `age`, `guidance_id`, `guidance`, `interest_id`, `interest`, `color`, `complement`, `message`, `status`, `is_old`, `is_infinite`, `created_at`) VALUES
+(280, 'Thiago', 'thioalves@gmail.com', 'Brusque', 'assets/img/mural/cb15a432d5739dee4a52ca913ccce2ec.jpg', 1, '(47)99280-0841', 37, 1, 'Heterossexual - [Para o Sexo o OPOSTO]', 2, 'Namorar', '#0a71c0', NULL, 'OLÁ, MEU NOME É Thiago, TENHO POR ORIENTAÇÃO SEXUAL A CLASSIFICAÇÃO 1:Heterossexual - [Para o Sexo o OPOSTO], MINHA IDADE É 37 ANOS. E AQUI VÃO OS MEUS CONTATOS PARA NOS LIGARMOS: thioalves@gmail.com / WHATSAPP: (47)99280-0841, TENHO INTERESSE EM 2:Namorar, RESIDO EM Brusque .', 1, 0, 0, '2024-02-07 22:46:47'),
+(281, 'Thiago Alves', 'thioalves@gmail.com', 'Brusque', 'assets/img/mural/884973f755008a9a0f83e97f673d5cad.jpg', 1, '(47)99280-0841', 37, 1, 'Heterossexual - [Para o Sexo o OPOSTO]', 3, 'Conhecer Alguém (Lugar Público)', '#ff194e', NULL, 'ME CHAMO Thiago Alves, SOU 1:Heterossexual - [Para o Sexo o OPOSTO], TENHO 37 ANOS, MEU E-MAIL É: thioalves@gmail.com / MEU WHATSAPP É: (47)99280-0841, E ESTOU AFIM DE: 3:Conhecer Alguém (Lugar Público), VIVO EM Brusque.', 1, 0, 0, '2024-02-07 22:45:27');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
+-- Estrutura da tabela `users`
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `pass` varchar(32) NOT NULL,
   `mode` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
--- Despejando dados para a tabela `users`
+-- Extraindo dados da tabela `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `pass`, `mode`, `created_at`) VALUES
@@ -127,56 +134,56 @@ INSERT INTO `users` (`id`, `name`, `email`, `pass`, `mode`, `created_at`) VALUES
 --
 
 --
--- Índices de tabela `guidance`
+-- Índices para tabela `guidance`
 --
 ALTER TABLE `guidance`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `interest`
+-- Índices para tabela `interest`
 --
 ALTER TABLE `interest`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `mural`
+-- Índices para tabela `mural`
 --
 ALTER TABLE `mural`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `users`
+-- Índices para tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `guidance`
 --
 ALTER TABLE `guidance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `interest`
 --
 ALTER TABLE `interest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `mural`
 --
 ALTER TABLE `mural`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=282;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
