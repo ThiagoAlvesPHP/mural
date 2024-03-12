@@ -78,8 +78,23 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <label for="age">Idade: <small>Maior de 18 anos</small></label>
-                    <input type="number" min="18" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age" required>
+                    <div class="group-form">
+                        <label for="age">Idade:</label>
+                        <input type="number" min="18" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
+                    </div>
+
+                    <div class="input-group">
+                        <span class="input-group-addon">OU</span>
+
+                        <select name="age_text" id="" class="form-control">
+                            <option value="" disabled selected>Caso queira selecione outra opção no lugar de IDADE</option>
+                            <option>α - sou novinho(a)</option>
+                            <option>z - sou Jovem</option>
+                            <option>y - sou Adulto</option>
+                            <option>x - sou Maduro(a)</option>
+                            <option>Baby boomers - sou Senhor(a)</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <label for="photo">Foto: <small>('png', 'jpg', 'jpeg')</small></label>
@@ -100,12 +115,25 @@
                 <?php endif; ?>
             </div>
         </div>
+        <div class="form-group guidances interests-primary">
+            <p class="title">Perfil para Relacionamento</p>
+            <div class="group-radios">
+                <?php if (!empty($interests_primary)) : ?>
+                    <?php foreach ($interests_primary as $value) : ?>
+                        <label class="radio-inline <?= (!empty($find) && $find['interest_primary_id'] == $value['id']) ? "active" : ""; ?>">
+                            <input type="radio" <?= (!empty($find) && $find['interest_primary_id'] == $value['id']) ? "checked" : ""; ?> name="interest_primary" id="interests_primary<?= $value['id'] ?>" value="<?= $value['id'] . ":" . $value['name']; ?>" required>
+                            <span><?= $value['name'] ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
         <div class="form-group interests">
             <p class="title">Interesse</p>
             <div class="group-radios">
                 <?php if (!empty($interests)) : ?>
                     <?php foreach ($interests as $value) : ?>
-                        <label class="radio-inline <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "active" : ""; ?>">
+                        <label class="radio-inline interests-primary-select<?= $value['interest_primary_id']; ?> <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "active" : ""; ?>">
                             <input type="radio" <?= (!empty($find) && $find['interest_id'] == $value['id']) ? "checked" : ""; ?> name="interest" id="interests<?= $value['id'] ?>" value="<?= $value['id'] . ":" . $value['title']; ?>" required>
                             <span><?= $value['title'] ?></span>
                         </label>

@@ -11,6 +11,7 @@ class homeController extends controller
 	protected $Sign;
 	protected $blockEmailIp;
 	protected $banner;
+	protected $interestPrimary;
 
 	public function __construct()
 	{
@@ -23,6 +24,7 @@ class homeController extends controller
 		$this->Sign = new Sign();
 		$this->blockEmailIp = new BlockEmailIp();
 		$this->banner = new Banner();
+		$this->interestPrimary = new InterestPrimary();
 
 		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
 		$this->mural->clean($date);
@@ -32,6 +34,7 @@ class homeController extends controller
 	{
 		$this->array['guidances'] = $this->guidances->list();
 		$this->array['interests'] = $this->interests->list();
+		$this->array['interests_primary'] = $this->interestPrimary->list();
 		$this->array['signs'] = $this->Sign->list();
 		$this->array['colors'] = $this->colors();
 		$this->array['success'] = (isset($this->get['success'])) ? true : false;
@@ -78,6 +81,8 @@ class homeController extends controller
 
 			$this->post = array_filter($this->post);
 			$this->post['color'] = $_POST['color'];
+			$this->post['age'] = (!empty($this->post['age'])) ? $this->post['age'] : $this->post['age_text'];
+			unset($this->post['age_text']);
 			$this->post['message'] = $this->message($this->post);
 
 			if (!empty($_FILES['photo']) && $_FILES['photo']['size'] > 0) {
@@ -114,6 +119,8 @@ class homeController extends controller
 			$this->post['guidance'] = explode(":", $this->post['guidance'])[1];
 			$this->post['interest_id'] = explode(":", $this->post['interest'])[0];
 			$this->post['interest'] = explode(":", $this->post['interest'])[1];
+			$this->post['interest_primary_id'] = explode(":", $this->post['interest_primary'])[0];
+			$this->post['interest_primary'] = explode(":", $this->post['interest_primary'])[1];
 			$this->post['is_mode_third'] = "0";
 
 			$this->mural->set($this->post);
@@ -257,64 +264,95 @@ class homeController extends controller
 	public function message($data)
 	{
 		$message = '';
-
 		$data['guidance'] = explode(":", $data['guidance'])[1];
-
-		print_r($data);
 
 		foreach ($this->colors() as $key => $value) {
 			if ($key == $data['color']) {
 				if ($data['color'] == 0) {
-					$message = "OI, ME CHAMO {$data['name']}, MINHA ORIENTAÇÃO SEXUAL É {$data['guidance']}, TENHO {$data['age']} ANOS. MEU E-MAIL É: {$data['email']} / E MEU WHATSAPP É: {$data['whatsapp']}, TENHO INTERESSE EM {$data['interest']}, MORO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS" : $data['age'];
+
+					$message = "OI, ME CHAMO {$data['name']}, MINHA ORIENTAÇÃO SEXUAL É {$data['guidance']}, {$age}. MEU E-MAIL É: {$data['email']} / E MEU WHATSAPP É: {$data['whatsapp']}, TENHO INTERESSE EM {$data['interest']}, MORO EM {$data['city']}.";
 				}
 				if ($data['color'] == 1) {
-					$message = "OLÁ, MEU NOME É {$data['name']}, TENHO POR ORIENTAÇÃO SEXUAL A CLASSIFICAÇÃO {$data['guidance']}, MINHA IDADE É {$data['age']} ANOS. E AQUI VÃO OS MEUS CONTATOS PARA NOS LIGARMOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, TENHO INTERESSE EM {$data['interest']}, RESIDO EM {$data['city']} .";
+					$age = (is_numeric($data['age'])) ? "MINHA IDADE É {$data['age']} ANOS" : $data['age'];
+
+					$message = "OLÁ, MEU NOME É {$data['name']}, TENHO POR ORIENTAÇÃO SEXUAL A CLASSIFICAÇÃO {$data['guidance']}, {$age}. E AQUI VÃO OS MEUS CONTATOS PARA NOS LIGARMOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, TENHO INTERESSE EM {$data['interest']}, RESIDO EM {$data['city']} .";
 				}
 				if ($data['color'] == 2) {
-					$message = "ALÔ, SOU {$data['name']}, {$data['guidance']}, TENHO {$data['age']} ANOS E  MEUS CONTATOS SÃO ESSES: {$data['email']} / WHATSAPP: {$data['whatsapp']}, ESTOU AFIM DE {$data['interest']}, SOU DE {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS" : $data['age'];
+
+					$message = "ALÔ, SOU {$data['name']}, {$data['guidance']}, {$age} E  MEUS CONTATOS SÃO ESSES: {$data['email']} / WHATSAPP: {$data['whatsapp']}, ESTOU AFIM DE {$data['interest']}, SOU DE {$data['city']}.";
 				}
 				if ($data['color'] == 3) {
-					$message = "ME CHAMO {$data['name']}, SOU {$data['guidance']}, TENHO {$data['age']} ANOS DE IDADE, EIS OS MEUS CONTATOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, ESTOU AFIM DE {$data['interest']}, VIVO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS DE IDADE" : $data['age'];
+
+					$message = "ME CHAMO {$data['name']}, SOU {$data['guidance']}, {$age}, EIS OS MEUS CONTATOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, ESTOU AFIM DE {$data['interest']}, VIVO EM {$data['city']}.";
 				}
 				if ($data['color'] == 4) {
-					$message = "SOU {$data['name']}, {$data['guidance']}, TENHO {$data['age']} ANOS, EIS OS MEUS CONTATOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, QUERO {$data['interest']}, MORO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS" : $data['age'];
+
+					$message = "SOU {$data['name']}, {$data['guidance']}, {$age}, EIS OS MEUS CONTATOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, QUERO {$data['interest']}, MORO EM {$data['city']}.";
 				}
 				if ($data['color'] == 5) {
-					$message = "MEU NOME É {$data['name']}, {$data['guidance']} TENHO {$data['age']} ANOS DE IDADE, AQUI VAI MEUS CONTATOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, TÔ AFIM DE: {$data['interest']}, SOU DE {$data['city']}, PODES ME AJUDAR?";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS DE IDADE" : $data['age'];
+
+					$message = "MEU NOME É {$data['name']}, {$data['guidance']} {$age}, AQUI VAI MEUS CONTATOS: {$data['email']} / WHATSAPP: {$data['whatsapp']}, TÔ AFIM DE: {$data['interest']}, SOU DE {$data['city']}, PODES ME AJUDAR?";
 				}
 				if ($data['color'] == 6) {
-					$message = "{$data['name']}, {$data['guidance']}, {$data['age']} ANOS, E-MAIL: {$data['email']} / WHATSAPP: {$data['whatsapp']}, MEU INTERESSE É EM: {$data['interest']}, RESIDO EM {$data['city']}, ME PROCURE.";
+					$age = (is_numeric($data['age'])) ? "{$data['age']} ANOS" : $data['age'];
+
+					$message = "{$data['name']}, {$data['guidance']}, {$age}, E-MAIL: {$data['email']} / WHATSAPP: {$data['whatsapp']}, MEU INTERESSE É EM: {$data['interest']}, RESIDO EM {$data['city']}, ME PROCURE.";
 				}
 				if ($data['color'] == 7) {
-					$message = "ME CHAMO {$data['name']}, SOU {$data['guidance']}, TENHO {$data['age']} ANOS, MEU E-MAIL É: {$data['email']} / MEU WHATSAPP É: {$data['whatsapp']}, E ESTOU AFIM DE: {$data['interest']}, VIVO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS" : $data['age'];
+
+					$message = "ME CHAMO {$data['name']}, SOU {$data['guidance']}, {$age}, MEU E-MAIL É: {$data['email']} / MEU WHATSAPP É: {$data['whatsapp']}, E ESTOU AFIM DE: {$data['interest']}, VIVO EM {$data['city']}.";
 				}
 				if ($data['color'] == 8) {
-					$message = "OI PESSOAL ! MEU NOME É {$data['name']}, SOU {$data['guidance']}, TENHO {$data['age']} ANOS DE IDADE, EIS MEUS CONTATOS: {$data['email']} / MEU WHATSAPP É: {$data['whatsapp']}, CASO TENHAM O MESMO INTERESSE QUE EU, OU SEJA, ESTOU BUSCANDO {$data['interest']}, SOU DE {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS DE IDADE" : $data['age'];
+
+					$message = "OI PESSOAL ! MEU NOME É {$data['name']}, SOU {$data['guidance']}, {$age}, EIS MEUS CONTATOS: {$data['email']} / MEU WHATSAPP É: {$data['whatsapp']}, CASO TENHAM O MESMO INTERESSE QUE EU, OU SEJA, ESTOU BUSCANDO {$data['interest']}, SOU DE {$data['city']}.";
 				}
 				if ($data['color'] == 9) {
-					$message = "SOU {$data['name']}, SOU {$data['guidance']} E TENHO {$data['age']} ANOS DE IDADE, MEU E-MAIL E WHATS SÃO: {$data['email']} / {$data['whatsapp']}, ME PROCUREM, BUSCO {$data['interest']}, MORO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "E TENHO {$data['age']} ANOS DE IDADE" : $data['age'];
+
+					$message = "SOU {$data['name']}, SOU {$data['guidance']} {$age}, MEU E-MAIL E WHATS SÃO: {$data['email']} / {$data['whatsapp']}, ME PROCUREM, BUSCO {$data['interest']}, MORO EM {$data['city']}.";
 				}
 				if ($data['color'] == 10) {
-					$message = "{$data['name']}, {$data['guidance']}, {$data['age']} ANOS, COM OS SEGUINTES CONTATOS: {$data['email']} / {$data['whatsapp']}, BUSCA {$data['interest']}, AGUARDO SEU RETORNO, RESIDO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "{$data['age']} ANOS" : $data['age'];
+
+					$message = "{$data['name']}, {$data['guidance']}, {$age}, COM OS SEGUINTES CONTATOS: {$data['email']} / {$data['whatsapp']}, BUSCA {$data['interest']}, AGUARDO SEU RETORNO, RESIDO EM {$data['city']}.";
 				}
 				if ($data['color'] == 11) {
-					$message = "ME CHAMO {$data['name']}, ME CONSIDERO {$data['guidance']}, MINHA IDADE É {$data['age']} ANOS, MEU E-MAIL E WHATS SÃO: {$data['email']} / {$data['whatsapp']}, INTERESSE {$data['interest']}, VIVO EM {$data['city']}, AGUARDO VOCÊ!";
+					$age = (is_numeric($data['age'])) ? "MINHA IDADE È {$data['age']} ANOS" : $data['age'];
+
+					$message = "ME CHAMO {$data['name']}, ME CONSIDERO {$data['guidance']}, {$age}, MEU E-MAIL E WHATS SÃO: {$data['email']} / {$data['whatsapp']}, INTERESSE {$data['interest']}, VIVO EM {$data['city']}, AGUARDO VOCÊ!";
 				}
 				if ($data['color'] == 12) {
-					$message = "OI, ME CHAMO {$data['name']}, MINHA ORIENTAÇÃO SEXUAL É {$data['guidance']}, TENHO {$data['age']} ANOS. MEU E-MAIL É: {$data['email']} / E MEU WHATSAPP É: {$data['whatsapp']}, TENHO INTERESSE EM {$data['interest']}, SOU DE {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS" : $data['age'];
+
+					$message = "OI, ME CHAMO {$data['name']}, MINHA ORIENTAÇÃO SEXUAL É {$data['guidance']}, {$age}. MEU E-MAIL É: {$data['email']} / E MEU WHATSAPP É: {$data['whatsapp']}, TENHO INTERESSE EM {$data['interest']}, SOU DE {$data['city']}.";
 				}
 
 				if ($data['color'] == 13) {
-					$message = "ATENÇÃO PESSOAL, AQUI ESCREVE {$data['name']}, EU SOU {$data['guidance']}, MINHA IDADE É {$data['age']} ANOS. AQUI ESTA MEU E-MAIL: {$data['email']} / E MEU WHATSAPP É: {$data['whatsapp']}, ESTOU COM VONTADE DE {$data['interest']}, SOU DE {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "MINHA IDADE È {$data['age']} ANOS" : $data['age'];
+
+					$message = "ATENÇÃO PESSOAL, AQUI ESCREVE {$data['name']}, EU SOU {$data['guidance']}, {$age}. AQUI ESTA MEU E-MAIL: {$data['email']} / E MEU WHATSAPP É: {$data['whatsapp']}, ESTOU COM VONTADE DE {$data['interest']}, SOU DE {$data['city']}.";
 				}
 				if ($data['color'] == 14) {
-					$message = "ME CHAMO {$data['name']}, COM A ORIENTAÇÃO {$data['guidance']}, TENHO {$data['age']} ANOS. MEU E-MAIL: {$data['email']}, MEU WHATSAPP É: {$data['whatsapp']}, TENHO A INTENÇÃO DE {$data['interest']}, MORO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS" : $data['age'];
+
+					$message = "ME CHAMO {$data['name']}, COM A ORIENTAÇÃO {$data['guidance']}, {$age}. MEU E-MAIL: {$data['email']}, MEU WHATSAPP É: {$data['whatsapp']}, TENHO A INTENÇÃO DE {$data['interest']}, MORO EM {$data['city']}.";
 				}
 				if ($data['color'] == 15) {
-					$message = "PESSOAL, AQUI ESCREVE {$data['name']}, CERTAMENTE SOU {$data['guidance']}, TENHO {$data['age']} ANOS DE IDADE. ME PROCUREM EM E-MAIL: {$data['email']}, WHATSAPP É: {$data['whatsapp']}, GOSTARIA DE {$data['interest']}, RESIDO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "TENHO {$data['age']} ANOS DE IDADE" : $data['age'];
+
+					$message = "PESSOAL, AQUI ESCREVE {$data['name']}, CERTAMENTE SOU {$data['guidance']}, {$age}. ME PROCUREM EM E-MAIL: {$data['email']}, WHATSAPP É: {$data['whatsapp']}, GOSTARIA DE {$data['interest']}, RESIDO EM {$data['city']}.";
 				}
 				if ($data['color'] == 16) {
-					$message = "ENTÃO GALERA, EU {$data['name']}, SOU {$data['guidance']}, MINHA IDADE É {$data['age']} ANOS. ENTRE EM CONTATO VIA E-MAIL E/OU WHATS; O MEU E-MAIL É: {$data['email']}, E MEU WHATSAPP É: {$data['whatsapp']}, ESTOU SUPER AFIM DE {$data['interest']}, VIVO EM {$data['city']}.";
+					$age = (is_numeric($data['age'])) ? "MINHA IDADE È {$data['age']} ANOS" : $data['age'];
+
+					$message = "ENTÃO GALERA, EU {$data['name']}, SOU {$data['guidance']}, {$age}. ENTRE EM CONTATO VIA E-MAIL E/OU WHATS; O MEU E-MAIL É: {$data['email']}, E MEU WHATSAPP É: {$data['whatsapp']}, ESTOU SUPER AFIM DE {$data['interest']}, VIVO EM {$data['city']}.";
 				}
 			}
 		}

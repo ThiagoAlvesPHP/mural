@@ -1,8 +1,7 @@
 <?php
-class Interest extends model
+class InterestPrimary extends model
 {
-
-	const TABLE = "interest";
+	const TABLE = "interest_primary";
 
 	/**
 	 * find
@@ -59,8 +58,7 @@ class Interest extends model
 	 */
 	public function list()
 	{
-		$sql = $this->db->query("SELECT i.*, ip.name FROM " . self::TABLE . " as i LEFT JOIN ".InterestPrimary::TABLE." as ip ON i.interest_primary_id = ip.id");
-
+		$sql = $this->db->query("SELECT * FROM " . self::TABLE . "");
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 	/**
@@ -69,14 +67,5 @@ class Interest extends model
 	public function delete($id)
 	{
 		$sql = $this->db->query("DELETE FROM " . self::TABLE . " WHERE id = '{$id}'");
-	}
-	/**
-	 * validate color
-	 */
-	public function validate($title)
-	{
-		$sql = $this->db->query("SELECT * FROM " . self::TABLE . " WHERE title = '{$title}'");
-
-		return ($sql->rowCount() == 0) ? true : false;
 	}
 }

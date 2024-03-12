@@ -1,25 +1,27 @@
 <?php
-class interestController extends controller {
-	private $array = [];
-	private $post;
-	private $get;
-	private $user;
-	private $interest;
+class interestController extends controller
+{
+	protected $array = [];
+	protected $post;
+	protected $get;
+	protected $user;
+	protected $interest;
+	protected $InterestPrimary;
 
-	public function __construct(){
+	public function __construct()
+	{
 		$this->post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 		$this->get = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 		$this->user = new Users();
 		$this->user->logado();
 		$this->interest = new Interest();
-    }
+		$this->InterestPrimary = new InterestPrimary();
+	}
 
-	public function index() {
-		$this->array['list'] = $this->interest->list();
-		$this->array['error'] = (isset($this->get['error']))?true:false;
-		$this->array['success'] = (isset($this->get['success']))?true:false;
-		$this->array['delete'] = (isset($this->get['delete']))?true:false;
-		$this->array['up'] = (isset($this->get['up']))?true:false;
+	public function index()
+	{
+		$this->array['interest'] = $this->interest->list();
+		$this->array['interest_primary'] = $this->InterestPrimary->list();
 
 		$this->loadTemplate('admin/interest', $this->array);
 	}
@@ -35,22 +37,62 @@ class interestController extends controller {
 
 			if ($this->interest->validate($this->post['title'])) {
 				$this->interest->set($this->post);
-				header('Location: '.BASE.'interest?success=true');
+				$_SESSION['alert'] = [
+					"class"		=> "success",
+					"message"	=> "Registrado com sucesso!"
+				];
 			} else {
-				header('Location: '.BASE.'interest?error=true');
+				$_SESSION['alert'] = [
+					"class"		=> "warning",
+					"message"	=> "Título já registrado."
+				];
 			}
 		}
 		/** delete */
-		if(!empty($this->get['del'])) {
+		if (!empty($this->get['del'])) {
 			$this->interest->delete($this->get['del']);
-			header('Location: '.BASE.'interest?delete=true');
+			$_SESSION['alert'] = [
+				"class"		=> "danger",
+				"message"	=> "Deletado com sucesso!"
+			];
 		}
 		/**update */
 		if (!empty($this->post['up'])) {
 			unset($this->post['up']);
 
 			$this->interest->up($this->post);
-			header('Location: '.BASE.'interest?success=true&up=true');
+			$_SESSION['alert'] = [
+				"class"		=> "success",
+				"message"	=> "Atualizado com sucesso!"
+			];
 		}
+
+		// register InterestPrimary
+		if (!empty($this->post['set_' . InterestPrimary::TABLE])) {
+			unset($this->post['set_' . InterestPrimary::TABLE]);
+			$this->post['is_active'] = 1;
+
+			$this->InterestPrimary->set($this->post);
+
+			$_SESSION['alert'] = [
+				"class"		=> "success",
+				"message"	=> "Registrado com sucesso!"
+			];
+		}
+
+		// update InterestPrimary
+		if (!empty($this->post['up_' . InterestPrimary::TABLE])) {
+			unset($this->post['up_' . InterestPrimary::TABLE]);
+
+			$this->InterestPrimary->up($this->post);
+
+			$_SESSION['alert'] = [
+				"class"		=> "success",
+				"message"	=> "Atualizado com sucesso!"
+			];
+		}
+
+		header('Location: ' . BASE . 'interest');
+		exit;
 	}
 }
