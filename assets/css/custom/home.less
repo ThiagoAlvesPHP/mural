@@ -44,6 +44,26 @@
         }
 
         .form-group {
+            .active-blue {
+                border-color: @color-primary !important;
+                transform: scale(1);
+                animation: active-blue 2s infinite;
+            }
+
+            @keyframes active-blue {
+                0% {
+                    transform: scale(0.99);
+                }
+
+                70% {
+                    transform: scale(1);
+                }
+
+                100% {
+                    transform: scale(0.99);
+                }
+            }
+
             .group-radios {
                 display: grid;
                 grid-template-columns: 1fr;

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mural do Romance</title>
-    <link rel="icon" href="<?= BASE; ?>" type="image/x-icon" />
+    <link rel="icon" href="<?= BASE; ?>assets/img/labios.png" type="image/x-icon" />
     <link rel="stylesheet" href="<?= BASE; ?>assets/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="<?= BASE; ?>assets/css/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="<?= BASE; ?>assets/dataTable/dataTable.css">

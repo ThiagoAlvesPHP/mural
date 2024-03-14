@@ -37,7 +37,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th width="235">Ação</th>
+                    <th style="width: 235px;">Ação</th>
                     <th>Foto</th>
                     <th>Foto Ativa</th>
                     <th>Nome</th>

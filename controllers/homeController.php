@@ -265,6 +265,7 @@ class homeController extends controller
 	{
 		$message = '';
 		$data['guidance'] = explode(":", $data['guidance'])[1];
+		$data['interest'] = explode(":", $data['interest'])[1];
 
 		foreach ($this->colors() as $key => $value) {
 			if ($key == $data['color']) {

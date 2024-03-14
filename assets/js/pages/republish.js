@@ -1,5 +1,4 @@
 $(function () {
-    console.log(url);
     $(document).on('click', '.republish form button', function (el) {
         el.preventDefault();
 
@@ -21,5 +20,26 @@ $(function () {
                 console.log('Erro na requisição AJAX:', error);
             }
         });
+    });
+
+    $(document).on('click', '.interests-primary label', function(el){
+        //el.preventDefault();
+        let value = $(this).find('input').val();
+        let interest_primary_id = value.split(':')[0];
+        let labels = $(`.interests-primary-select${interest_primary_id}`);
+
+        let interests = $('.interests label');
+
+        for (let i = 0; i < interests.length; i++) {
+            const element = interests[i];
+            $(element).removeClass('active-blue');            
+        }
+
+        for (let i = 0; i < labels.length; i++) {
+            const element = labels[i];
+            $(element).addClass('active-blue');
+        }
+
+        console.log($(interests));
     });
 });

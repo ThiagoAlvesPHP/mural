@@ -30,9 +30,12 @@ $(function () {
         let city = $('#city').val();
         let whatsapp = $('#whatsapp').val();
         let age = $('#age').val();
+        var age_text = $('input[name="age_text"]').val();
         let guidance = verify($("[name='guidance']"));
         let interest = verify($("[name='interest']"));
         let color = verify($("[name='color']"));
+        
+        age = age ? age : age_text;
         
         if (name != '' && email != '' && whatsapp != '' && age != '' && guidance && interest && color) {
             let guidance = valueChecked($("[name='guidance']"));
