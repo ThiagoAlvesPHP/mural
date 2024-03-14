@@ -15,14 +15,19 @@
                 <span>Mural</span>
                 <i class="fas fa-pencil-alt"></i>
             </a>
-
+            <hr>
             <div class="row mode">
-                <div class="col-sm-6">
-                    <a href="<?= BASE; ?>admin/mode/<?= $user['mode']; ?>" class="btn btn-<?= (!$user['mode']) ? 'danger' : 'success' ?> btn-lg btn-block"><span>Modo <?= ($user['mode']) ? 'Automático' : 'Manual' ?></span></a>
+                <div class="col-sm-4 text">
+                    <div class="alert alert-danger text-center">
+                        <span>Automático</span> <i class="far fa-lightbulb"></i>
+                    </div>
                 </div>
-                <div class="col-sm-6 text">
-                    <div class="alert text-center">
-                        Modo <span><?= (!$user['mode']) ? 'Automático' : 'Manual' ?></span> Ligado <i class="far fa-lightbulb"></i>
+                <div class="col-sm-4 text-center action">
+                    <a href="<?= BASE; ?>admin/mode/<?= $user['mode']; ?>" class="btn btn-<?= (!$user['mode']) ? 'danger' : 'success' ?> btn-lg btn-block"><span><?= ($user['mode']) ? '<i class="fas fa-toggle-on"></i>' : '<i class="fas fa-toggle-off"></i>' ?></span></a>
+                </div>
+                <div class="col-sm-4 text">
+                    <div class="alert alert-success text-center">
+                        <span>Manual</span> <i class="far fa-lightbulb"></i>
                     </div>
                 </div>
             </div>

@@ -23,9 +23,6 @@
         <div class="loader"></div>
     </div>
 
-    <!-- header -->
-    <!-- <?php require "./views/template-header.php"; ?> -->
-
     <!-- menu -->
     <nav class="navbar navbar-default">
         <div class="container">
