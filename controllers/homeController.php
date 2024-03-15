@@ -85,6 +85,15 @@ class homeController extends controller
 			unset($this->post['age_text']);
 			$this->post['message'] = $this->message($this->post);
 
+			if (is_numeric($this->post['age'])) {
+				if ($this->post['age'] < 16) {
+					$_SESSION['alert'] = [
+						"class" 	=> "danger",
+						"message"	=> "Desculpe, você está abaixo da idade legal para se relacionar afetuosamente.A IDADE DO CONSENTIMENTO é o início legal para se iniciar uma relação afetiva, pois com ela já se possui compreenção geral;capacidade de analise e decisão, e certa maturidade emocional."
+					];
+				}
+			}
+
 			if (!empty($_FILES['photo']) && $_FILES['photo']['size'] > 0) {
 				$extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
 				// Verifica se a extensão é PNG ou JPG

@@ -80,14 +80,16 @@
                 <div class="col-sm-6">
                     <div class="group-form">
                         <label for="age">Idade:</label>
-                        <input type="number" min="18" name="age" placeholder="Caso tenha algum valor nesse campo a opção abaixo não será considerada" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
+                        <small>Caso tenha alguma idade no campo abaixo a opção "OU" não será considerada</small>
+                        <input type="number" min="16" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
+
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon">OU</span>
 
-                        <select name="age_text" id="" class="form-control">
-                            <option value="" selected>Caso queira selecione outra opção no lugar de IDADE</option>
+                        <select name="age_text" id="age_text" class="form-control">
+                            <option value="" selected>Selecione outra opção no lugar de IDADE</option>
                             <option>α - sou novinho(a)</option>
                             <option>z - sou Jovem</option>
                             <option>y - sou Adulto</option>
@@ -95,6 +97,7 @@
                             <option>Baby boomers - sou Senhor(a)</option>
                         </select>
                     </div>
+
                 </div>
                 <div class="col-sm-6">
                     <label for="photo">Foto: <small>('png', 'jpg', 'jpeg')</small></label>
