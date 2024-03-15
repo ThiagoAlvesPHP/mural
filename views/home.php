@@ -1,34 +1,4 @@
 <section class="home">
-    <header class="header">
-        <?php if (!empty($banners)) : ?>
-            <div class="header-carousel">
-                <?php foreach ($banners as $key => $value) : ?>
-                    <div class="item-banner" style="background-image: url('<?= $value['image']; ?>');">
-                        <p class="title">
-                            <?= $value['title']; ?>
-                        </p>
-                        <p class="text">
-                            <?= $value['text']; ?>
-                        </p>
-                        <a href="<?= $value['link']; ?>" target="_blank" class="btn btn-info link">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php else : ?>
-            <div class="alert alert-warning">
-                Nenhum registro de banner encontrado!
-            </div>
-        <?php endif; ?>
-    </header>
-
-    <script>
-        $(document).ready(function() {
-            $('.header-carousel').slick();
-        });
-    </script>
-
     <?php if (!empty($signs)) : ?>
         <div class="signs">
             <marquee class="content" behavior="scroll" direction="left" scrollamount="10" loop="infinite">
@@ -38,6 +8,34 @@
             </marquee>
         </div>
     <?php endif; ?>
+
+    <div class="republish">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary button-action" data-toggle="modal" data-target="#modal_republicar">
+            Republicar
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="modal_republicar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modalLabelSmall">Republicar</h4>
+                    </div>
+                    <form action="" class="form-action">
+                        <div class="modal-body">
+                            <input type="email" name="email" class="form-control" placeholder="Digite seu e-mail">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Republicar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <h1 class="title">Mural do Romance <i class="fas fa-pencil-alt"></i></h1>
     <h3 class="sub-title">Seu Classificado de Relacionamentos</h3>
@@ -81,7 +79,7 @@
                     <div class="group-form">
                         <label for="age">Idade:</label>
                         <small>Caso tenha alguma idade no campo abaixo a opção "OU" não será considerada</small>
-                        <input type="number" min="16" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
+                        <input type="number" min="14" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
 
                     </div>
 
@@ -224,6 +222,40 @@
         <?php endif; ?>
     </section>
 
+    <section class="header">
+        <?php if (!empty($banners)) : ?>
+            <div class="header-carousel">
+                <?php foreach ($banners as $key => $value) : ?>
+                    <div class="item-banner" style="background-image: url('<?= $value['image']; ?>');">
+                        <p class="title">
+                            <?= $value['title']; ?>
+                        </p>
+                        <p class="text">
+                            <?= $value['text']; ?>
+                        </p>
+                        <a href="<?= $value['link']; ?>" target="_blank" class="btn btn-info link">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else : ?>
+            <div class="alert alert-warning">
+                Nenhum registro de banner encontrado!
+            </div>
+        <?php endif; ?>
+
+
+        <script>
+            $(document).ready(function() {
+                $('.header-carousel').slick({
+                    infinite: true,
+                    speed: 300
+                });
+            });
+        </script>
+    </section>
+
     <!-- cassifiados antigos -->
     <section class="well" id="ca">
         <div class="form-group guidances">
@@ -256,35 +288,6 @@
             <?php endforeach; ?>
         <?php endif; ?>
     </section>
-
-    <div class="republish">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary button-action" data-toggle="modal" data-target="#modal_republicar">
-            Republicar
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="modal_republicar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="modalLabelSmall">Republicar</h4>
-                    </div>
-                    <form action="" class="form-action">
-                        <div class="modal-body">
-                            <input type="email" name="email" class="form-control" placeholder="Digite seu e-mail">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Republicar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </div>
 </section>
 
 <script src="<?= BASE . 'assets/js/pages/republish.js'; ?>"></script>

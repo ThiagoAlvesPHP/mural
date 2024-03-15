@@ -81,16 +81,29 @@ class homeController extends controller
 
 			$this->post = array_filter($this->post);
 			$this->post['color'] = $_POST['color'];
+
+			if (!isset($this->post['age']) && !isset($this->post['age_text'])) {
+				echo "erro";
+				$_SESSION['alert'] = [
+					"class" 	=> "danger",
+					"message"	=> "Desculpe, o campo de Idade é obrigatório."
+				];
+				header('Location: ' . BASE);
+				exit;
+			}
+
 			$this->post['age'] = (!empty($this->post['age'])) ? $this->post['age'] : $this->post['age_text'];
 			unset($this->post['age_text']);
 			$this->post['message'] = $this->message($this->post);
 
 			if (is_numeric($this->post['age'])) {
-				if ($this->post['age'] < 16) {
+				if ($this->post['age'] < 14) {
 					$_SESSION['alert'] = [
 						"class" 	=> "danger",
 						"message"	=> "Desculpe, você está abaixo da idade legal para se relacionar afetuosamente.A IDADE DO CONSENTIMENTO é o início legal para se iniciar uma relação afetiva, pois com ela já se possui compreenção geral;capacidade de analise e decisão, e certa maturidade emocional."
 					];
+					header('Location: ' . BASE);
+					exit;
 				}
 			}
 
@@ -114,11 +127,13 @@ class homeController extends controller
 				}
 			}
 
-			if ($mode['mode']) {
-				if (!empty($this->post['complement'])) {
-					$this->post['status'] = '0';
-				}
-			}
+			// $this->post['status'] = $mode['mode'] ? '1' : "0";
+			// if ($mode['mode']) {
+			// 	if (!empty($this->post['complement'])) {
+			// 		$this->post['status'] = '0';
+			// 	}
+			// }
+
 			foreach ($this->colors() as $key => $value) {
 				if ($key == $this->post['color']) {
 					$this->post['color'] = $value['color'];
@@ -132,11 +147,16 @@ class homeController extends controller
 			$this->post['interest_primary'] = explode(":", $this->post['interest_primary'])[1];
 			$this->post['is_mode_third'] = "0";
 
-			$this->mural->set($this->post);
+			$params = $this->post;
+			$params['status'] = $mode['mode'] ? '0' : "1";
+
+			$this->mural->set($params);
+
+			$message = $mode['mode'] ? "Sua mensagem esta em processo de aprovação. Aguarde!" : "Sua mensagem foi publicada com sucesso! - Em 07 dias ela será excluída! - <p>Algumas mensagens podem ser premiadas ficando mais tempo no ar</p>";
 
 			$_SESSION['alert'] = [
 				"class"		=> "success",
-				"message"	=> "Sua mensagem esta em processo de aprovação. Aguarde!' : 'Sua mensagem foi puclicada com sucesso! - Em 07 dias ela será excluída! - <p>Algumas mensagens podem ser premiadas ficando mais tempo no ar</p>"
+				"message"	=> $message
 			];
 
 			header('Location: ' . BASE . '?success=true');

@@ -171,11 +171,17 @@
     }
 
     .republish {
+        display: flex;
+        justify-content: end;
+        margin-top: 20px;
+
         .button-action {
+            position: sticky;
+            z-index: 2;
             background-color: @color-primary;
-            position: fixed;
-            top: 80px;
-            right: 15px;
+            // position: fixed;
+            // top: 80px;
+            // right: 15px;
             transition: all ease .5s;
 
             &:hover {
