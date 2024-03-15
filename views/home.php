@@ -72,7 +72,7 @@
                     <input type="city" name="city" class="form-control" value="<?= (!empty($find)) ? $find['city'] : ""; ?>" id="city" required>
                 </div>
                 <div class="col-sm-6">
-                    <label for="whatsapp">Whatsapp:</label>
+                    <label for="whatsapp">Telefone/Whatsapp:</label>
                     <input type="text" name="whatsapp" class="form-control" id="whatsapp" value="<?= (!empty($find)) ? $find['whatsapp'] : ""; ?>" required>
                 </div>
             </div>
@@ -80,14 +80,14 @@
                 <div class="col-sm-6">
                     <div class="group-form">
                         <label for="age">Idade:</label>
-                        <input type="number" min="18" name="age" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
+                        <input type="number" min="18" name="age" placeholder="Caso tenha algum valor nesse campo a opção abaixo não será considerada" class="form-control" value="<?= (!empty($find)) ? $find['age'] : ""; ?>" id="age">
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-addon">OU</span>
 
                         <select name="age_text" id="" class="form-control">
-                            <option value="" disabled selected>Caso queira selecione outra opção no lugar de IDADE</option>
+                            <option value="" selected>Caso queira selecione outra opção no lugar de IDADE</option>
                             <option>α - sou novinho(a)</option>
                             <option>z - sou Jovem</option>
                             <option>y - sou Adulto</option>
