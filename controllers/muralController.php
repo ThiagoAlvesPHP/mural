@@ -27,6 +27,7 @@ class muralController extends controller
 	public function index()
 	{
 		$this->array['listApproved'] = $this->mural->listApproved();
+		$this->array['listPending'] = $this->mural->listPending(); 
 		$this->array['listOld'] = $this->mural->listOld();
 
 		if (isset($this->get['photo_valid']) && !empty($this->get['id'])) {
@@ -89,11 +90,10 @@ class muralController extends controller
 		/**update */
 		if (!empty($this->get['approved'])) {
 			$this->mural->up(["status" => 1, 'id' => $this->get['approved']]);
-			header('Location: ' . BASE . 'admin?approved=true');
-			exit;
+		
 			$_SESSION['alert'] = [
 				"class"		=> "success",
-				"message"	=> "Publicação altorizada com sucesso. " . $this->get['approved']
+				"message"	=> "Publicação autorizada com sucesso. " . $this->get['approved']
 			];
 		}
 
