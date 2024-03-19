@@ -1,5 +1,5 @@
 <section class="mural-admin">
-    <h1 class="title"><i class="fas fa-pencil-alt"></i> Mural</h1>
+    <h1 class="title"><i class="fas fa-pencil-alt"></i> Publicações</h1>
     <hr>
 
     <div class="row">

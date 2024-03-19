@@ -265,7 +265,7 @@
         <?php if (!empty($listOld)) : ?>
             <?php foreach ($listOld as $value) : ?>
                 <div class="alert list-old" style="background-color: <?= $value['color']; ?>;">
-                    <img src="<?= ($value['photo_valid'] && isset($value['photo']) && file_exists($value['photo'])) ? BASE . $value['photo'] : BASE . 'assets/img/user-default.webp' ?>" class="user-photo" alt="<?= $value['name']; ?>" data-toggle="modal" data-target="#modal<?= $value['id']; ?>">
+                    <!-- <img src="<?= ($value['photo_valid'] && isset($value['photo']) && file_exists($value['photo'])) ? BASE . $value['photo'] : BASE . 'assets/img/user-default.webp' ?>" class="user-photo" alt="<?= $value['name']; ?>" data-toggle="modal" data-target="#modal<?= $value['id']; ?>">
 
                     <div class="modal fade" id="modal<?= $value['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="true">
                         <div class="modal-dialog modal-sm">
@@ -281,7 +281,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <span><?= $value['message']; ?> <?= $value['complement']; ?></span>
                 </div>

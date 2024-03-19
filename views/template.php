@@ -42,7 +42,7 @@
                     <?php if (!empty($_SESSION['cLogin'])) : ?>
                         <li>
                             <a href="<?= BASE; ?>mural">
-                                <i class="fas fa-pencil-alt"></i> Mural
+                                <i class="fas fa-pencil-alt"></i> Publicações
                             </a>
                         </li>
                         <li>

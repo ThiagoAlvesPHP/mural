@@ -127,12 +127,12 @@ class homeController extends controller
 				}
 			}
 
-			// $this->post['status'] = $mode['mode'] ? '1' : "0";
-			// if ($mode['mode']) {
-			// 	if (!empty($this->post['complement'])) {
-			// 		$this->post['status'] = '0';
-			// 	}
-			// }
+			$this->post['status'] = $mode['mode'] ? '1' : "0";
+			if ($mode['mode']) {
+				if (!empty($this->post['complement'])) {
+					$this->post['status'] = '0';
+				}
+			}
 
 			foreach ($this->colors() as $key => $value) {
 				if ($key == $this->post['color']) {
@@ -149,6 +149,7 @@ class homeController extends controller
 
 			$params = $this->post;
 			$params['status'] = $mode['mode'] ? '0' : "1";
+			$params['photo_valid'] = $mode['mode'] ? '0' : "1";
 
 			$this->mural->set($params);
 
