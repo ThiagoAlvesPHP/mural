@@ -29,6 +29,7 @@ class muralController extends controller
 		$this->array['listApproved'] = $this->mural->listApproved();
 		$this->array['listPending'] = $this->mural->listPending(); 
 		$this->array['listOld'] = $this->mural->listOld();
+		$this->array['listModeThird'] = $this->mural->listModeThird();
 
 		if (isset($this->get['photo_valid']) && !empty($this->get['id'])) {
 			header('Location: ' . BASE . 'mural/photoValid/' . $this->get['id'] . '?photo_valid=' . $this->get['photo_valid']);

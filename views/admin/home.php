@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-6">
             <a href="<?= BASE ?>mural" class="btn btn-info btn-block btn-lg">
-                <span>Mural</span>
+                <span>Publicações</span>
                 <i class="fas fa-pencil-alt"></i>
             </a>
             <hr>
@@ -38,6 +38,7 @@
                 <span>Limpeza automática de publicações de 07 dias para trás</span>
             </div>
         </div>
+        
         <div class="col-sm-6">
             <h3>Publicações Pendentes</h3>
 

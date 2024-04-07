@@ -118,13 +118,23 @@ class Mural extends model
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
 	/**
-	 * List
+	 * List Old
 	 */
 	public function listOld()
 	{
 		$sql = $this->db->query("SELECT * FROM " . Mural::TABLE . " WHERE is_old = 1 ORDER BY id DESC");
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	/**
+	 * List mode Third
+	 */
+	public function listModeThird()
+	{
+		$sql = $this->db->query("SELECT * FROM " . Mural::TABLE . " WHERE is_mode_third = 1 ORDER BY id DESC");
+		return $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+
 	/**
 	 * delete
 	 */
@@ -140,6 +150,7 @@ class Mural extends model
 	{
 		$this->db->query("DELETE FROM " . Mural::TABLE);
 	}
+
 	/**
 	 * validate color
 	 */
@@ -149,14 +160,28 @@ class Mural extends model
 
 		return ($sql->rowCount() == 0) ? true : false;
 	}
+
 	/**
 	 * clean
 	 */
-	public function clean($date)
+	public function clean($date, $dateCa, $dateDel)
 	{
-		$sql = "UPDATE " . Mural::TABLE . " SET is_old = " . true . " WHERE DATE(created_at) <= :date AND is_infinite = :is_infinite";
+		$sql = "UPDATE " . Mural::TABLE . " SET is_old = 1 WHERE DATE(created_at) <= :date AND is_infinite = :is_infinite";
 		$query = $this->db->prepare($sql);
 		$query->bindValue(":date", $date);
+		$query->bindValue(":is_infinite", false);
+		$query->execute();
+
+
+		$sql = "UPDATE " . Mural::TABLE . " SET is_old = 1, is_mode_third = 1  WHERE DATE(created_at) <= :date AND is_infinite = :is_infinite";
+		$query = $this->db->prepare($sql);
+		$query->bindValue(":date", $dateCa);
+		$query->bindValue(":is_infinite", false);
+		$query->execute();
+
+		$sql = "DELETE FROM " . Mural::TABLE . " WHERE DATE(created_at) <= :date AND is_infinite = :is_infinite";
+		$query = $this->db->prepare($sql);
+		$query->bindValue(":date", $dateDel);
 		$query->bindValue(":is_infinite", false);
 		$query->execute();
 	}

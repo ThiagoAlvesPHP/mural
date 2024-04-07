@@ -27,7 +27,9 @@ class homeController extends controller
 		$this->interestPrimary = new InterestPrimary();
 
 		$date = date('Y-m-d', strtotime('-7 days', strtotime(date('Y-m-d'))));
-		$this->mural->clean($date);
+		$dateCa = date('Y-m-d', strtotime('-32 days', strtotime(date('Y-m-d'))));
+		$dateDel = date('Y-m-d', strtotime('-365 days', strtotime(date('Y-m-d'))));
+		$this->mural->clean($date, $dateCa, $dateDel);
 	}
 
 	public function index()
